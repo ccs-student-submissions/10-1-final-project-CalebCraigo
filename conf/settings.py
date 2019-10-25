@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'final-project-calebcraigo.herokuapp.com',
+    'shut-up-and-eat.herokuapp.com',
     'localhost',
     ]
 
