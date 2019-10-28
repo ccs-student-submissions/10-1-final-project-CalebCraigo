@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.aside-box {
+  margin-top: 2.5%;
+  margin-left: 1.5% !important;
+  border: solid 1px #2A332D;
+  position: absolute;
+  background-color: #2A332D;
+  color: #fff;
+  height: 500px;
+
+}

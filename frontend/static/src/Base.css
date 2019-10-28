@@ -1,0 +1,8 @@
+main {
+  position: relative;
+}
+
+.map {
+  position: absolute;
+  z-index: -1;
+}
