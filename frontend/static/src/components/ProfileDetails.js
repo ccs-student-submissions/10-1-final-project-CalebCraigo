@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import '../Aside.css';
 
+axios.defaults.headers.common['Authorization'] = `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`;
 
 class ProfileDetails extends Component {
   constructor(props) {
@@ -9,26 +10,17 @@ class ProfileDetails extends Component {
 
     this.state = {
       profile: {},
-      created_by: '',
-      user:JSON.parse(localStorage.getItem('my-app-user')).user_id,
+
     };
   }
 
   componentDidMount() {
-    let p = window.location.pathname.split('/');
-    console.log(p);
+    // let p = window.location.pathname.split('/');
+    // console.log(p);
 
-    axios.get('/api/v1/profile/')
+    axios.get('/api/v1/profile/detail/')
     .then(res => {
-      for (let i=0; i<res.data.length; i++) {
-        if (res.data[i].id === parseInt(p[3])) {
-
-          this.setState({profile: res.data[i]});
-        }
-        console.log(res.data[i]);
-        console.log(res.data[i].id);
-
-      }
+        this.setState({profile: res.data[0]})
     })
     .catch(error =>{
       console.log(error);
@@ -36,8 +28,6 @@ class ProfileDetails extends Component {
   }
 
   render(){
-
-    console.log(this.state)
     return (
       <section className='aside-content'>
         <h1>{this.state.profile.name}</h1>

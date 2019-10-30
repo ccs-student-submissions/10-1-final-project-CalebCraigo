@@ -17,7 +17,7 @@ ReactDOM.render(
     <Base>
           <Switch>
             <Route path='/profile/create/' component={ProfileCreate} />
-            <Route path='/profile/:id' component={ProfileDetails} />
+            <Route path='/profile/' component={ProfileDetails} />
             <Route path='/login/' component={Login} />
             <Route path='/signup/' component={SignUp} />
             <Route path='/result/' component={Aside} />

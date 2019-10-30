@@ -25,7 +25,7 @@ class Login extends Component {
     axios.post('/api/v1/rest-auth/login/', this.state)
     .then(res => {
         localStorage.setItem('my-app-user', JSON.stringify(res.data));
-        this.props.history.push('/');
+        this.props.history.push('/profile/');
     })
     .catch(error => {
         console.log(error);
@@ -37,7 +37,7 @@ class Login extends Component {
   }
 
   render() {
-    console.log('here', this.props)
+
     return  (
       <form onSubmit={this.handleSubmit}>
         <p>

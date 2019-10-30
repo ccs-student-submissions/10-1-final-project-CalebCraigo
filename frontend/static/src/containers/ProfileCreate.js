@@ -64,6 +64,7 @@ class ProfileCreate extends Component {
     .then(res => {
       let profile = [...this.state.profile];
       this.setState({profile: profile, name:'', preview: null, image: null, created_by:''});
+
       this.props.history.push('/profile/');
     })
     .catch(error =>{

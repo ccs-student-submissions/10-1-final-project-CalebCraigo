@@ -3,22 +3,44 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
-from accounts.models import UserProfile
-from .serializers import CustomUserSerializer
+from accounts.models import UserProfile, CustomUser
+from .serializers import UserProfileSerializer, UserSerializer
+
+
+class UserListAPIView(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+
+
+# class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = CustomUser.objects.all()
+#     serializer_class = UserSerializer
+
 
 class UserProfileCreateAPIView(generics.ListCreateAPIView):
     queryset = UserProfile.objects.all()
-    serializer_class = CustomUserSerializer
+    serializer_class = UserProfileSerializer
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
 
 class UserProfileRetieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserProfile.objects.all()
-    serializer_class = CustomUserSerializer
+    serializer_class = UserProfileSerializer
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
+
+class UserProfileListAPIView(generics.ListAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return UserProfile.objects.filter(created_by=user.id)
+
 
 class CustomAuthToken(ObtainAuthToken):
 
