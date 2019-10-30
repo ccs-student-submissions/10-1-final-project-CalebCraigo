@@ -185,3 +185,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
 # https://docs.djangoproject.com/en/2.2/ref/contrib/sites/
 # The SITE_ID setting specifies the database ID of the Site object associated with that particular settings file.
 SITE_ID = 1 # new
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'

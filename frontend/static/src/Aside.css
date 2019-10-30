@@ -1,10 +1,15 @@
 .aside-box {
   margin-top: 2.5%;
   margin-left: 1.5% !important;
-  border: solid 1px #2A332D;
+  border: solid 1px #282C2F;
+  border-radius: 5px;
   position: absolute;
-  background-color: #2A332D;
+  background-color: #282C2F;
   color: #fff;
-  height: 500px;
-
+  height: 90vh;
+  opacity: .9;
+  text-align: center;
+}
+.aside-content {
+  opacity: 1 !important;
 }

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import axios from 'axios';
-import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from "react-google-maps";
+// import axios from 'axios';
+import { GoogleMap, withScriptjs, withGoogleMap, } from "react-google-maps";
 
 // Import custom styles to customize the style of Google Map
 const styles = require('./GoogleMapStyles.json')
@@ -11,7 +11,7 @@ class MyMap extends Component {
     super(props);
 
     this.state = {
-      restuarant: [],
+      restaurant: [],
     };
   }
   // componentDidMount() {

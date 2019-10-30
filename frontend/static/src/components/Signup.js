@@ -26,7 +26,7 @@ class SignUp extends Component {
     axios.post('/api/v1/rest-auth/registration/', this.state)
     .then(res => {
         localStorage.setItem('my-app-user', JSON.stringify(res.data));
-        this.props.history.push('/');
+        this.props.history.push('/profile/create/');
     })
     .catch(error => {
         console.log(error);

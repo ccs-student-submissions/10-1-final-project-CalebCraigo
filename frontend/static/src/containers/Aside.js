@@ -1,7 +1,6 @@
 import React, {Component} from "react";
-import axios from 'axios';
 import '../Aside.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+// import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 class Aside extends Component {
 

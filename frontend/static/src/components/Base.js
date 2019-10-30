@@ -3,7 +3,7 @@ import '../Base.css';
 import Map from '../containers/Map';
 
 import '../Aside.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+// import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 
 function Base(props) {
@@ -13,8 +13,10 @@ function Base(props) {
     <section className='row map'>
       <Map />
     </section>
-      <section className='row asideBox'>
+      <section className='row'>
+        <div className='col-md-3 col-sm-12 aside-box'>
         {props.children}
+        </div>
       </section>
     </main>
   );

@@ -4,5 +4,9 @@ main {
 
 .map {
   position: absolute;
-  z-index: -1;
+
+}
+
+.aside-content {
+  opacity: 1 !important;
 }
