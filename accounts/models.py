@@ -22,6 +22,7 @@ class UserProfile(models.Model):
     name = models.CharField(max_length=255)
     avatar = models.ImageField(upload_to='images/', blank=True, null=True)
     created_by = models.OneToOneField(CustomUser, related_name='profile', null=True, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

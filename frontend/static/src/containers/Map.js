@@ -11,7 +11,7 @@ class MyMap extends Component {
     super(props);
 
     this.state = {
-      restaurant: [],
+      restaurant: { lat: 32, lng: 32},
       userLocation: { lat: 32, lng: 32},
       loading: true,
     };
@@ -34,7 +34,6 @@ class MyMap extends Component {
 
   render() {
     const { loading, userLocation } = this.state;
-    const { google } = this.props;
 
     if (loading) {
       return null;

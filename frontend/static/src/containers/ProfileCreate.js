@@ -17,6 +17,7 @@ class ProfileCreate extends Component {
       // preferences: false,
       profile: [],
       created_by: '',
+      // is_active: true,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -63,7 +64,7 @@ class ProfileCreate extends Component {
     })
     .then(res => {
       let profile = [...this.state.profile];
-      this.setState({profile: profile, name:'', preview: null, image: null, created_by:''});
+      this.setState({profile: profile, name:'', preview: null, image: null, created_by:'', is_active: true,});
 
       this.props.history.push('/profile/');
     })

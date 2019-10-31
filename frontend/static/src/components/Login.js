@@ -25,6 +25,7 @@ class Login extends Component {
     axios.post('/api/v1/rest-auth/login/', this.state)
     .then(res => {
         localStorage.setItem('my-app-user', JSON.stringify(res.data));
+        console.log('local storage', localStorage);
         this.props.history.push('/profile/');
     })
     .catch(error => {
@@ -53,6 +54,7 @@ class Login extends Component {
           <input id='password' type='password' name='password' value={this.state.password} onChange={this.handleChange} placeholder='Enter password' required/>
         </p>
         <button>Login</button>
+        <a href='/'>Back</a>
       </form>
     )
   }
