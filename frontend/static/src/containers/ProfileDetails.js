@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import '../Aside.css';
+// import '../Aside.css';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -16,13 +16,11 @@ class ProfileDetails extends Component {
       is_active: '',
       navigate: false,
     };
-    this.deactivate = this.deactivate.bind(this)
+    this.deactivate = this.deactivate.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    // console.log('here i am', localStorage);
-    // console.log('axios', axios.defaults.headers.common);
     axios.get('/api/v1/profile/detail/', {headers: {'Authorization': `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`}})
     .then(res => {
         this.setState({profile: res.data[0]});
@@ -42,10 +40,8 @@ class ProfileDetails extends Component {
   deactivate = () => {
     axios.patch(`/api/v1/profile/${this.state.profile.id}/`, {is_active: false});
     this.setState({is_active: false});
-    console.log(this.state.profile.is_active)
-    console.log(this.state.is_active)
     this.props.history.push('/');
-  }
+  };
 
   render(){
     const { navigate } = this.state;

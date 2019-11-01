@@ -1,24 +1,39 @@
 import React from 'react';
-import '../Base.css';
-import Map from '../containers/Map';
+import Map from './../containers/Map.js';
 
-import '../Aside.css';
+import '../Base.css';
+// import Map from '../containers/Map';
+
+// import '../Aside.css';
 // import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 
 function Base(props) {
-  return (
 
-    <main className='container-fluid'>
-    <section className='row map'>
-      <Map />
-    </section>
-      <section className='row'>
-        <div className='col-md-3 col-sm-12 aside-box'>
+  let restaurant = {
+    lat: '',
+    lng: ''
+  }
+
+  let randomGenerator = () => {
+  // axios.get("https://developers.zomato.com/api/v2.1/search?lat=34.8526&lon=-82.3940&radius=8000&key=5ff1c6015f3549f838e7d3a54deb7e8f");
+    restaurant = {
+      lat: '12',
+      lng: '23'
+    }
+  }
+
+
+
+  return (
+    <div className='row'>
+      <Map restaurant={restaurant}/>
+      <aside>
         {props.children}
-        </div>
-      </section>
-    </main>
+        <button type='button' onClick={randomGenerator}>Random Generator</button>
+      </aside>
+
+    </div>
   );
 }
 

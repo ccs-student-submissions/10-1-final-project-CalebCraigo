@@ -1,10 +1,17 @@
 import React, {Component} from "react";
 // import axios from 'axios';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps";
+import Aside from './../components/Aside.js'
 
 // Import custom styles to customize the style of Google Map
-const styles = require('./GoogleMapStyles.json')
+const styles = require('./GoogleMapStyles.json');
 
+const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+console.log(getRandomInt(0, 2294));
 
 class MyMap extends Component {
     constructor(props) {
@@ -15,6 +22,8 @@ class MyMap extends Component {
       userLocation: { lat: 32, lng: 32},
       loading: true,
     };
+
+    // this.randomGenerator = this.randomGenerator.bind(this);
   }
   componentDidMount(props) {
     navigator.geolocation.getCurrentPosition(
@@ -32,13 +41,18 @@ class MyMap extends Component {
     );
   }
 
+
   render() {
+    console.log('map props', this.props);
     const { loading, userLocation } = this.state;
 
     if (loading) {
       return null;
     }
+
+
     return (
+
         <GoogleMap
         defaultZoom={15}
         defaultCenter={ userLocation }
@@ -53,7 +67,6 @@ class MyMap extends Component {
           <Marker position= { userLocation } />
         </GoogleMap>
 
-
     )
   }
 }
@@ -63,17 +76,17 @@ class MyMap extends Component {
 //
 const WrappedMap = withScriptjs(withGoogleMap(MyMap));
 
-export default function Map(){
-
+export default function Map(props){
+  console.log('wrapped map', props)
     return(
-        <div style={{ width:"100vw", height:"100vh" }}>
+        <div className='map'>
 
             <WrappedMap
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBm5r5sZESK6Jo8pWiLFjkGvpGJ010ED9I`}
                 loadingElement={<div style={{height: "100% "}} />}
                 containerElement={<div style={{height: "100% "}} />}
                 mapElement ={<div style={{height: "100% "}} />}
-
+                restaurant={props.restaurant}
                 />
         </div>
     )

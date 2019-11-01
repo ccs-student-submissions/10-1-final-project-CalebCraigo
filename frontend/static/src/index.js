@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Title from './components/Title'
-import Aside from './containers/Aside';
-import Login from './components/Login';
-import SignUp from './components/Signup';
+import Aside from './components/Aside';
+import Login from './containers/Login';
+import SignUp from './containers/Signup';
 import ProfileCreate from './containers/ProfileCreate';
-import ProfileDetails from './components/ProfileDetails';
+import ProfileDetails from './containers/ProfileDetails';
+import Restaurants from './containers/Restaurants';
+import Home from './components/Home.js';
 import Base from './components/Base';
 import * as serviceWorker from './serviceWorker';
 
@@ -20,8 +21,7 @@ ReactDOM.render(
             <Route path='/profile/' component={ProfileDetails} />
             <Route path='/login/' component={Login} />
             <Route path='/signup/' component={SignUp} />
-            <Route path='/result/' component={Aside} />
-            <Route exact path='/' component={Title} />
+            <Route exact path='/' component={Home} />
           </Switch>
     </Base>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous"/>
