@@ -13,9 +13,9 @@ class Home extends Component {
     return (
       <div>
         <h1>Shut Up & Eat</h1>
-        <button onClick={this.randomGenerator}>Click Here!</button>
         <a href='/login/'>Sign In</a>
         <a href='/signup/'>Sign up</a>
+        <button type='button' onClick={this.randomGenerator}>Click Here</button>
       </div>
     )
   }

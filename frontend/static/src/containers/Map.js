@@ -6,19 +6,13 @@ import Aside from './../components/Aside.js'
 // Import custom styles to customize the style of Google Map
 const styles = require('./GoogleMapStyles.json');
 
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-};
-console.log(getRandomInt(0, 2294));
 
 class MyMap extends Component {
     constructor(props) {
     super(props);
 
     this.state = {
-      restaurant: { lat: 32, lng: 32},
+      restaurantLocation: { lat: 32, lng: 32},
       userLocation: { lat: 32, lng: 32},
       loading: true,
     };
@@ -26,6 +20,7 @@ class MyMap extends Component {
     // this.randomGenerator = this.randomGenerator.bind(this);
   }
   componentDidMount(props) {
+
     navigator.geolocation.getCurrentPosition(
       position => {
         const { latitude, longitude } = position.coords;
@@ -41,11 +36,22 @@ class MyMap extends Component {
     );
   }
 
+  static getDerivedStateFromProps(props, state) {
+      return {
+        restaurantLocation: {lat:props.restaurantLocation.lat, lng:props.restaurantLocation.lng}
+      }
+}
+
+  selectedRestaurant(props) {
+    this.setState({restaurantLocation: {lat:this.props.restaurantLocation.lat, lng:this.props.restaurantLocation.lng}});
+    console.log(this.state.restaurantLocation);
+  }
+
 
   render() {
-    console.log('map props', this.props);
-    const { loading, userLocation } = this.state;
 
+    console.log('map props', this.state.restaurantLocation, this.state.userLocation);
+    const { loading, userLocation, restaurantLocation } = this.state;
     if (loading) {
       return null;
     }
@@ -65,6 +71,7 @@ class MyMap extends Component {
           styles: styles}}
         >
           <Marker position= { userLocation } />
+          <Marker position={ restaurantLocation }/>
         </GoogleMap>
 
     )
@@ -86,7 +93,7 @@ export default function Map(props){
                 loadingElement={<div style={{height: "100% "}} />}
                 containerElement={<div style={{height: "100% "}} />}
                 mapElement ={<div style={{height: "100% "}} />}
-                restaurant={props.restaurant}
+                restaurantLocation={props.restaurantLocation}
                 />
         </div>
     )
