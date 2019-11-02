@@ -42,10 +42,6 @@ class MyMap extends Component {
       }
 }
 
-  selectedRestaurant(props) {
-    this.setState({restaurantLocation: {lat:this.props.restaurantLocation.lat, lng:this.props.restaurantLocation.lng}});
-    console.log(this.state.restaurantLocation);
-  }
 
 
   render() {

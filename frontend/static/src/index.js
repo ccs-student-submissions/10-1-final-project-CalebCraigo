@@ -7,6 +7,7 @@ import SignUp from './containers/Signup';
 import ProfileCreate from './containers/ProfileCreate';
 import ProfileDetails from './containers/ProfileDetails';
 import Restaurants from './containers/Restaurants';
+import RestaurantDetail from './components/RestaurantDetail';
 import Home from './components/Home.js';
 import Base from './components/Base';
 import * as serviceWorker from './serviceWorker';
@@ -17,6 +18,7 @@ ReactDOM.render(
   <Router>
     <Base>
           <Switch>
+            <Route path='/restaurant/' component={RestaurantDetail} />
             <Route path='/profile/create/' component={ProfileCreate} />
             <Route path='/profile/' component={ProfileDetails} />
             <Route path='/login/' component={Login} />
