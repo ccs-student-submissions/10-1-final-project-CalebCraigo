@@ -21,4 +21,4 @@ class CustomUserChangeForm(UserChangeForm):
 #
 #     class Meta:
 #         model = UserProfile
-#         fields = ('preferences',)
+#         fields = ('highlights', 'establishmenttypes', 'cuisines',)

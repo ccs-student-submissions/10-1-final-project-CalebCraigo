@@ -19,7 +19,7 @@ class Base extends Component {
       restaurantLocation: { lat: null, lng: null},
       userLocation: { lat: null, lng: null},
       restaurantIndex: '',
-      restaurant: [],
+      restaurant: {},
       restaurantSelected: false,
       navigate: false,
       breakfast: false,
@@ -60,6 +60,7 @@ class Base extends Component {
     return Math.floor(Math.random() * (max - min)) + min;
   }
   randomGenerator(min, max){
+    console.log('here');
     axios.get(`https://developers.zomato.com/api/v2.1/search?lat=${this.state.userLocation.lat}&lon=${this.state.userLocation.lng}&radius=8000&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
     .then(res => {
       this.setState({restaurant:res.data.restaurants[Object.keys(res.data.restaurants)[this.getRandomInt(0, 21)]]});
@@ -80,25 +81,33 @@ class Base extends Component {
     }
 
   render(){
-    const restaurant = this.state.restaurantSelected;
-    let restaurantDetail;
-    if (restaurant === false){
-      restaurantDetail =  null;
-    }else{
-    restaurantDetail =  <RestaurantDetail restaurant={this.state.restaurant} />
-    }
+    console.log(this.props)
+    // const restaurant = this.state.restaurantSelected;
+    // let restaurantDetail;
+    // if (restaurant === false){
+    //   restaurantDetail =  null;
+    // }else{
+    // restaurantDetail =  <RestaurantDetail restaurant={this.state.restaurant} />
+    // }
+    //
 
     return (
       <div className='row'>
         <Map restaurantLocation={this.state.restaurantLocation}/>
-        <aside>
-          <h1>Shut Up & Eat</h1>
-          <a href='/login/'>Sign In</a>
-          <a href='/signup/'>Sign up</a>
-          <a href='/profile/'>Profile</a>
+
+      <aside>
+
           {this.props.children}
+
           <button type='button' onClick={this.randomGenerator}>Random Generator</button>
-          {restaurantDetail}
+
+          {/* only show RestaurantDetail component if random restaurant was selected */}
+          {this.state.restaurantSelected ? (
+            <RestaurantDetail restaurant={this.state.restaurant} />
+          ) : (
+            null
+          )}
+
         </aside>
       </div>
     );

@@ -5,8 +5,10 @@ import './Aside.css';
 class Aside extends Component {
 
   render() {
+
     return (
       <div className='aside-box'>
+        <button type='button' onClick={this.randomGenerator}>HEY A BUTTON</button>
       </div>
     )
   }
