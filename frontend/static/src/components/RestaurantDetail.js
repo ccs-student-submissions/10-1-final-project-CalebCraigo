@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Base from './Base.js';
+// import Base from './Base.js';
 
 
 class RestaurantDetail extends Component {
@@ -28,10 +28,10 @@ class RestaurantDetail extends Component {
     // })restaurant.restaurant.name
     return (
       <div>
-      {this.props.restaurant.restaurant.name}
-      {this.props.restaurant.restaurant.cuisines}
-      {this.props.restaurant.restaurant.timings}
-      
+      <h2>{this.props.restaurant.restaurant.name}</h2>
+      <p>{this.props.restaurant.restaurant.cuisines}</p>
+      <p>{this.props.restaurant.restaurant.timings}</p>
+
       </div>
     );
   }

@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Aside from './components/Aside';
 import Login from './containers/Login';
 import SignUp from './containers/Signup';
 import ProfileCreate from './containers/ProfileCreate';
 import ProfileDetails from './containers/ProfileDetails';
-import Restaurants from './containers/Restaurants';
+// import Restaurants from './containers/Restaurants';
 import RestaurantDetail from './components/RestaurantDetail';
 import Home from './components/Home.js';
 import Base from './components/Base';

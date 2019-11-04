@@ -7,10 +7,6 @@ class Aside extends Component {
   render() {
     return (
       <div className='aside-box'>
-        <h1>Shut Up & Eat</h1>
-        <p>Avatar</p>
-        <p>Users Name</p>
-        <p>Profile Details</p>
       </div>
     )
   }

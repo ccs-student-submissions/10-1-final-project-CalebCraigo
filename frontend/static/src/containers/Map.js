@@ -29,6 +29,7 @@ class MyMap extends Component {
           userLocation: { lat: latitude, lng: longitude },
           loading: false
         });
+        console.log(this.state.userLocation)
       },
       () => {
         this.setState({ loading: false });
