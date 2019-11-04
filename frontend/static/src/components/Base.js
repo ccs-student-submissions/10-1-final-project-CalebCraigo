@@ -85,10 +85,7 @@ class Base extends Component {
     if (restaurant === false){
       restaurantDetail =  null;
     }else{
-    <div>
     restaurantDetail =  <RestaurantDetail restaurant={this.state.restaurant} />
-    // <input type='checkbox' name='breakfast' value={this.state.breakfast} onChange={this.handleChange}/>
-    </div>
     }
 
     return (

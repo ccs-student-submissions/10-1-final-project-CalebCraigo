@@ -15,9 +15,12 @@ class ProfileDetails extends Component {
       profile: {},
       is_active: '',
       navigate: false,
+      avatar: '',
+      preview: '',
     };
     this.deactivate = this.deactivate.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleAvatarUpdate = this.handleAvatarUpdate.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -30,9 +33,48 @@ class ProfileDetails extends Component {
     });
   }
 
+  handleAvatarUpdate(e){
+    let file = e.target.files[0];
+    // axios.patch(`/api/v1/profile/${this.state.profile.id}/`, {avatar: file});
+    this.setState({avatar: file});
+
+    let reader = new FileReader();
+    reader.onloadend = () => {
+      this.setState({preview: reader.result});
+    };
+    reader.readAsDataURL(file);
+  }
+
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    let formData = new FormData();
+    formData.append('avatar', this.state.avatar);
+    // formData.append('preferences', this.state.preferences);
+
+
+
+    axios.patch(`/api/v1/profile/${this.state.profile.id}/`, formData, {
+      headers : {
+        'content-type': 'multipart/form-data'
+      }
+    })
+    .then(res => {
+      let profile = [...this.state.profile];
+      this.setState({profile: profile, name:'', preview: null, image: null, created_by:'', is_active: true,});
+
+      this.props.history.push('/profile/');
+    })
+    .catch(error =>{
+      console.log(error);
+    });
+  }
+
+
   logout = () => {
     axios.post('/api/v1/rest-auth/logout/');
-    localStorage.clear('token');
+    localStorage.removeItem('my-app-user');
     this.setState({ navigate: true });
   }
 
@@ -54,6 +96,12 @@ class ProfileDetails extends Component {
         <form onSubmit={this.handleSubmit}>
           <h1>{this.state.profile.name}</h1>
           <img src={this.state.profile.avatar} alt='' />
+          {this.state.avatar ? (
+            <img src={this.state.profile.preview} alt='preview'/>
+          ):(
+            <input type='file' name='avatar' onChange={this.handleAvatarUpdate}/>
+          )}
+
           <p>Prefences Place Holder</p>
           <button>Save</button>
         </form>
