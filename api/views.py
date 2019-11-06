@@ -42,6 +42,15 @@ class UserProfileListAPIView(generics.ListAPIView):
         return UserProfile.objects.filter(created_by=user.id)
 
 
+class PreferencesRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+    def get_object_or_404(self):
+        user = self.request.user
+        return UserProfile.objects.filter(highlights=highlights)
+
+
 class CustomAuthToken(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):

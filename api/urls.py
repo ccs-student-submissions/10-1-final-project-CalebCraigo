@@ -11,7 +11,7 @@ urlpatterns = [
     # this is the url to view, update and delete a specific profile
     path('profile/<int:pk>/', views.UserProfileRetieveUpdateDestroyAPIView.as_view(), name='profile-update'),
     path('profile/create/', views.UserProfileCreateAPIView.as_view(), name='profile-create'),
-
+    path('profile/detail/<int:pk>/', views.PreferencesRetrieveAPIView.as_view(), name='profile-highlights'),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('rest-auth/login/', views.CustomAuthToken.as_view(), name='login'),
     path('rest-auth/', include('rest_auth.urls')),

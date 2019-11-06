@@ -16,9 +16,8 @@ class MyMap extends Component {
       userLocation: { lat: 32, lng: 32},
       loading: true,
     };
-
-    // this.randomGenerator = this.randomGenerator.bind(this);
   }
+
   componentDidMount(props) {
 
     navigator.geolocation.getCurrentPosition(
@@ -40,9 +39,10 @@ class MyMap extends Component {
   static getDerivedStateFromProps(props, state) {
       return {
         restaurantLocation: {lat:props.restaurantLocation.lat, lng:props.restaurantLocation.lng}
-      }
-}
 
+      }
+      console.log(this.state.restaurantLocation.lat)
+}
 
 
   render() {
@@ -53,7 +53,8 @@ class MyMap extends Component {
       return null;
     }
 
-
+    console.log('userLocation', userLocation)
+    console.log('restaurantLocation', restaurantLocation)
     return (
 
         <GoogleMap
@@ -67,17 +68,14 @@ class MyMap extends Component {
           scrollwheel: true,
           styles: styles}}
         >
-          <Marker position= { userLocation } />
-          <Marker position={ restaurantLocation }/>
+        <Marker position= { userLocation } />
+        <Marker position={ restaurantLocation }/>
         </GoogleMap>
 
     )
   }
 }
-//
-//
-//
-//
+
 const WrappedMap = withScriptjs(withGoogleMap(MyMap));
 
 export default function Map(props){

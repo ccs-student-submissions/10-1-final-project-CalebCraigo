@@ -12,9 +12,9 @@ class UserProfile(models.Model):
     avatar = models.ImageField(upload_to='images/', blank=True, null=True)
     created_by = models.OneToOneField(CustomUser, related_name='profile', null=True, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
-    highlights = models.ManyToManyField('Highlight', related_name='highlights', blank=True)
-    establishmenttypes = models.ManyToManyField('EstablishmentType', related_name='establishmenttypes', blank=True)
-    cuisines = models.ManyToManyField('Cuisine', related_name='cuisines', blank=True)
+    highlights = models.ManyToManyField('Highlight', related_name='highlights', blank=True, null=True)
+    establishmenttypes = models.ManyToManyField('EstablishmentType', related_name='establishmenttypes', blank=True, null=True)
+    cuisines = models.ManyToManyField('Cuisine', related_name='cuisines', blank=True, null=True)
 
 
     def __str__(self):

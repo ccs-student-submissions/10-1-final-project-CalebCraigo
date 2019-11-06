@@ -26,11 +26,12 @@ class ProfileDetails extends Component {
   componentDidMount() {
     axios.get('/api/v1/profile/detail/', {headers: {'Authorization': `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`}})
     .then(res => {
-        this.setState({profile: res.data[0]});
+      this.setState({profile: res.data[0]});
     })
     .catch(error =>{
       console.log(error);
     });
+
   }
 
   handleAvatarUpdate(e){
@@ -51,8 +52,6 @@ class ProfileDetails extends Component {
 
     let formData = new FormData();
     formData.append('avatar', this.state.avatar);
-    // formData.append('preferences', this.state.preferences);
-
 
 
     axios.patch(`/api/v1/profile/${this.state.profile.id}/`, formData, {
@@ -64,7 +63,7 @@ class ProfileDetails extends Component {
       let profile = [...this.state.profile];
       this.setState({profile: profile, name:'', preview: null, image: null, created_by:'', is_active: true,});
 
-      this.props.history.push('/profile/');
+      this.props.history.push('/');
     })
     .catch(error =>{
       console.log(error);
@@ -91,18 +90,22 @@ class ProfileDetails extends Component {
     if (navigate) {
       return <Redirect to='/' push={true} />;
     }
+    console.log(this.state.profile)
     return (
       <section className='aside-content'>
         <form onSubmit={this.handleSubmit}>
           <h1>{this.state.profile.name}</h1>
-          <img src={this.state.profile.avatar} alt='' />
           {this.state.avatar ? (
             <img src={this.state.profile.preview} alt='preview'/>
           ):(
+            <React.Fragment>
+            <img src={this.state.profile.avatar} alt='' />
             <input type='file' name='avatar' onChange={this.handleAvatarUpdate}/>
+            </React.Fragment>
           )}
 
           <p>Prefences Place Holder</p>
+          <p>{this.state.profile.highlights}</p>
           <button>Save</button>
         </form>
           <a href='/'>Back</a>
