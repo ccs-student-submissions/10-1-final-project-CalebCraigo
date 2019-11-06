@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from accounts.models import UserProfile, CustomUser, Highlight
 from django import forms
+import json
 
 
 class HighlightSerializer(serializers.ModelSerializer):
@@ -9,7 +10,7 @@ class HighlightSerializer(serializers.ModelSerializer):
         fields = ['text',]
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    highlights = serializers.ListField(write_only=True)
+    highlights = HighlightSerializer(many=True, required=False)
 
     class Meta:
         model = UserProfile
@@ -17,11 +18,12 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
-        highlights_data = validated_data.pop('highlights')
-        highlights_data = highlights_data[0].slice(',')
+        # Converts the stringified array from the from end into a python list
+        highlights_data = json.loads(self.context['request'].data['highlights'])
         profile = UserProfile.objects.create(**validated_data)
+
         for highlight in highlights_data:
-            highlight, created = Highlight.objects.get_or_create(text=highlight)
+            highlight = Highlight.objects.get(text=highlight)
             profile.highlights.add(highlight)
         return profile
 

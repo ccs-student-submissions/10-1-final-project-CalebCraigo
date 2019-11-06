@@ -28,7 +28,7 @@ class MyMap extends Component {
           userLocation: { lat: latitude, lng: longitude },
           loading: false
         });
-        console.log(this.state.userLocation)
+        // console.log(this.state.userLocation)
       },
       () => {
         this.setState({ loading: false });
@@ -41,20 +41,20 @@ class MyMap extends Component {
         restaurantLocation: {lat:props.restaurantLocation.lat, lng:props.restaurantLocation.lng}
 
       }
-      console.log(this.state.restaurantLocation.lat)
+      // console.log(this.state.restaurantLocation.lat)
 }
 
 
   render() {
 
-    console.log('map props', this.state.restaurantLocation, this.state.userLocation);
+    // console.log('map props', this.state.restaurantLocation, this.state.userLocation);
     const { loading, userLocation, restaurantLocation } = this.state;
     if (loading) {
       return null;
     }
 
-    console.log('userLocation', userLocation)
-    console.log('restaurantLocation', restaurantLocation)
+    // console.log('userLocation', userLocation)
+    // console.log('restaurantLocation', restaurantLocation)
     return (
 
         <GoogleMap
@@ -79,7 +79,7 @@ class MyMap extends Component {
 const WrappedMap = withScriptjs(withGoogleMap(MyMap));
 
 export default function Map(props){
-  console.log('wrapped map', props)
+  // console.log('wrapped map', props)
     return(
         <div className='map'>
 

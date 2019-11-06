@@ -97,7 +97,7 @@ class ProfileCreate extends Component {
 
     formData.append('name', this.state.name);
     formData.append('avatar', this.state.avatar);
-    formData.append('highlights', highlights);
+    formData.append('highlights', JSON.stringify(highlights));
     console.log(highlights)
     axios.post(`/api/v1/profile/create/`, formData, {
       headers : {

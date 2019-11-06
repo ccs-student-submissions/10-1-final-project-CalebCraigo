@@ -7,6 +7,7 @@ axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.headers.common["Authorization"] = localStorage.getItem('my-app-user') ? `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}` : null;
 
+
 class ProfileDetails extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,7 @@ class ProfileDetails extends Component {
       navigate: false,
       avatar: '',
       preview: '',
+      loading: false,
     };
     this.deactivate = this.deactivate.bind(this);
     this.handleAvatarUpdate = this.handleAvatarUpdate.bind(this);
@@ -26,7 +28,10 @@ class ProfileDetails extends Component {
   componentDidMount() {
     axios.get('/api/v1/profile/detail/', {headers: {'Authorization': `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`}})
     .then(res => {
+      console.log(res)
       this.setState({profile: res.data[0]});
+
+
     })
     .catch(error =>{
       console.log(error);
@@ -86,11 +91,10 @@ class ProfileDetails extends Component {
 
   render(){
     const { navigate } = this.state;
-
     if (navigate) {
       return <Redirect to='/' push={true} />;
     }
-    console.log(this.state.profile)
+
     return (
       <section className='aside-content'>
         <form onSubmit={this.handleSubmit}>
@@ -103,9 +107,23 @@ class ProfileDetails extends Component {
             <input type='file' name='avatar' onChange={this.handleAvatarUpdate}/>
             </React.Fragment>
           )}
-
-          <p>Prefences Place Holder</p>
-          <p>{this.state.profile.highlights}</p>
+          <p>Highlights</p>
+          <p>Kid Friendly</p>
+          <input type='checkbox' name='kid_friendly' value={this.state.kid_friendly} onChange={this.handleCheckboxChange} />
+          <p>Outdoor Seating</p>
+          <input type='checkbox' name='outdoor_seating' value={this.state.outdoor_seating} onChange={this.handleCheckboxChange} />
+          <p>Vegetarian Friendly</p>
+          <input type='checkbox' name='vegetarian_friendly' value={this.state.vegetarian_friendly} onChange={this.handleCheckboxChange} />
+          <p>Gluten Free Option</p>
+          <input type='checkbox' name='gluten_free_options' value={this.state.gluten_free_options} onChange={this.handleCheckboxChange} />
+          <p>Farm-to-Table</p>
+          <input type='checkbox' name='farm_to_table' value={this.state.farm_to_table} onChange={this.handleCheckboxChange} />
+          <p>Serves Alcohol</p>
+          <input type='checkbox' name='serves_alcohol' value={this.state.serves_alcohol} onChange={this.handleCheckboxChange} />
+          <p>Fullbar</p>
+          <input type='checkbox' name='fullbar' value={this.state.fullbar} onChange={this.handleCheckboxChange} />
+          <p>Waterfront</p>
+          <input type='checkbox' name='waterfront' value={this.state.waterfront} onChange={this.handleCheckboxChange} />
           <button>Save</button>
         </form>
           <a href='/'>Back</a>
