@@ -20,7 +20,8 @@ class Base extends Component {
       restaurantSelected: false,
       profile:{},
       start: 0,
-      highlights: '',
+      highlights: [],
+      highlight: '',
     };
     this.randomGenerator = this.randomGenerator.bind(this);
     // this.userPreference = this.userPreference.bind(this);
@@ -35,26 +36,44 @@ class Base extends Component {
         });
       }
     );
-    axios.get(`/api/v1/profile/detail/`, {headers: {'Authorization': `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`}})
+
+
+
+    let headers = null;
+
+    if(localStorage.getItem('my-app-user')) {
+      headers = {
+        'Authorization': `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`
+      }
+    }
+
+    axios.get(`/api/v1/profile/detail/`, {headers: headers})
     .then(res => {
+
+      let highlight = []
       this.setState({profile: res.data[0]})
+      this.setState({highlights: this.state.profile.highlights})
       let highlights = [...this.state.profile.highlights]
-        highlights.forEach(function(highlight){
-          // console.log(encodeURI(...this.profile.highlights))
-        })
-        console.log(encodeURI(...this.state.profile.highlights))
+      highlights.forEach(function(item){
+        return highlight.push(item.text)
+      })
+      let highlightStr = highlight.toString()
+      let highlightNewStr = highlightStr.replace(/,/g, ' ');
+      let highlightsURL = encodeURI(highlightNewStr)
+      this.setState({highlight: highlightsURL})
+      // console.log(highlightStr)
+      // console.log(highlightNewStr)
+      // console.log(highlightsURL)
+      // console.log(this.state.highlight)
     })
     .catch(error =>{
       console.log(error);
     });
-
- }
-
-
+   }
 
   randomGenerator(){
-    https://developers.zomato.com/api/v2.1/search?q=nightlife%2C%20gastro%20pub&lat=34.8526&lon=-82.3940&radius=8000
-    axios.get(`https://developers.zomato.com/api/v2.1/search?lat=${this.state.userCoords.lat}&lon=${this.state.userCoords.lng}&start=${this.state.start}&count=20&radius=8000&q=Nightlife&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
+    //https://developers.zomato.com/api/v2.1/search?q=nightlife%2C%20gastro%20pub&lat=34.8526&lon=-82.3940&radius=8000
+    axios.get(`https://developers.zomato.com/api/v2.1/search?lat=${this.state.userCoords.lat}&lon=${this.state.userCoords.lng}&start=${this.state.start}&count=20&radius=8000&q=${this.state.highlight}&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
     .then(res => {
       let restaurant = res.data.restaurants[Math.floor(Math.random()*res.data.restaurants.length)];
       this.setState({restaurant, start: this.state.start + 20});

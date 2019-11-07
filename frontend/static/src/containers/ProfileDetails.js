@@ -54,10 +54,29 @@ class ProfileDetails extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    let obj = {
+      kid_friendly: 'Kid Friendly',
+      outdoor_seating: 'Outdoor Seating',
+      vegetarian_friendly: 'Vegetarian Friendly',
+      gluten_free_options: 'Gluten Free Options',
+      farm_to_table: 'Farm-to-Table',
+      serves_alcohol: 'Serves Alcohol',
+      fullbar: 'Fullbar',
+      waterfront: 'Waterfront'
+    }
 
     let formData = new FormData();
-    formData.append('avatar', this.state.avatar);
+    let data = this.state;
+    let highlights = []
 
+    for (var key in obj) {
+      if(data[key] === true) {
+        highlights.push(obj[key]);
+      }
+    }
+
+    formData.append('avatar', this.state.avatar);
+    formData.append('highlights', JSON.stringify(highlights));
 
     axios.patch(`/api/v1/profile/${this.state.profile.id}/`, formData, {
       headers : {
