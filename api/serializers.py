@@ -9,13 +9,13 @@ class HighlightSerializer(serializers.ModelSerializer):
         model = Highlight
         fields = ['text',]
 
+
 class UserProfileSerializer(serializers.ModelSerializer):
     highlights = HighlightSerializer(many=True, required=False)
 
     class Meta:
         model = UserProfile
         fields = ('name', 'avatar', 'id', 'highlights',)
-
 
     def create(self, validated_data):
         # Converts the stringified array from the from end into a python list

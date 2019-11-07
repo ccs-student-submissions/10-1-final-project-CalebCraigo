@@ -4,11 +4,20 @@ aside {
   margin-left: 1.5%;
 
   height: 90vh;
-  opacity: .9;
+  /* opacity: .9; */
   text-align: center;
   border: solid 1px #282C2F;
   border-radius: 5px;
   background-color: #282C2F;
   padding: 20px;
   color: #fff;
+}
+
+.profileimg {
+  border-radius:50%;
+  width: 40%;
+}
+
+.highlights {
+  margin-bottom: 0;
 }

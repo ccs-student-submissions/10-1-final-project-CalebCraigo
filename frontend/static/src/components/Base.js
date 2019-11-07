@@ -91,16 +91,16 @@ class Base extends Component {
   render(){
     // console.log(this.props)
     // console.log(this.props.profile)
-    console.log(localStorage)
+    // console.log(localStorage)
     return (
       <div className='row'>
         <Map restaurantLocation={this.state.restaurant ? {lat: Number(this.state.restaurant.restaurant.location.latitude), lng: Number(this.state.restaurant.restaurant.location.longitude)} : {lat: 32, lng: 32}}/>
       <aside>
           {this.props.children}
           {this.state.start === 60 ? (
-            <p>Stop being picky! Shut up and Eat here!</p>
+            <p>Stop being picky! Shut up and Eat!</p>
           ):(
-            <button type='button' onClick={this.randomGenerator}>Random Generator</button>
+            <button className='btn btn-secondary btn-lg' type='button' onClick={this.randomGenerator}>Random Generator</button>
           )}
           {/* only show RestaurantDetail component if random restaurant was selected */}
           {this.state.restaurantSelected ? (

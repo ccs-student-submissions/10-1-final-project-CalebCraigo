@@ -26,6 +26,7 @@ class ProfileCreate extends Component {
       serves_alcohol: false,
       fullbar: false,
       waterfront: false,
+      live_music: false
       // establishmenttypes: {
       //   casual_dining: false,
       //   fast_food: false,
@@ -82,14 +83,15 @@ class ProfileCreate extends Component {
       farm_to_table: 'Farm-to-Table',
       serves_alcohol: 'Serves Alcohol',
       fullbar: 'Fullbar',
-      waterfront: 'Waterfront'
+      waterfront: 'Waterfront',
+      live_music: 'Live Music'
     }
 
     let formData = new FormData();
     let data = this.state;
     let highlights = []
 
-    for (var key in obj) {
+    for (let key in obj) {
       if(data[key] === true) {
         highlights.push(obj[key]);
       }
@@ -135,29 +137,31 @@ class ProfileCreate extends Component {
           <input type='text' name='name' value={this.state.name} onChange={this.handleChange}/>
           <p>Add a picture!</p>
           {this.state.avatar ? (
-            <img src={this.state.preview} alt='preview'/>
+            <img className='profileimg' src={this.state.preview} alt='preview'/>
           ):(
             <input type='file' name='avatar' onChange={this.handleAvatarChange}/>
           )}
 
-          <p>Highlights</p>
-          <p>Kid Friendly</p>
-          <input type='checkbox' name='kid_friendly' value={this.state.kid_friendly} onChange={this.handleCheckboxChange} />
-          <p>Outdoor Seating</p>
-          <input type='checkbox' name='outdoor_seating' value={this.state.outdoor_seating} onChange={this.handleCheckboxChange} />
-          <p>Vegetarian Friendly</p>
-          <input type='checkbox' name='vegetarian_friendly' value={this.state.vegetarian_friendly} onChange={this.handleCheckboxChange} />
-          <p>Gluten Free Option</p>
-          <input type='checkbox' name='gluten_free_options' value={this.state.gluten_free_options} onChange={this.handleCheckboxChange} />
-          <p>Farm-to-Table</p>
-          <input type='checkbox' name='farm_to_table' value={this.state.farm_to_table} onChange={this.handleCheckboxChange} />
-          <p>Serves Alcohol</p>
-          <input type='checkbox' name='serves_alcohol' value={this.state.serves_alcohol} onChange={this.handleCheckboxChange} />
-          <p>Fullbar</p>
-          <input type='checkbox' name='fullbar' value={this.state.fullbar} onChange={this.handleCheckboxChange} />
-          <p>Waterfront</p>
-          <input type='checkbox' name='waterfront' value={this.state.waterfront} onChange={this.handleCheckboxChange} />
-          <button>Save</button>
+          <p>Select some preferences to help us make a selection for you!</p>
+          <p className='highlights'>Kid Friendly</p>
+          <input className='checkbox' type='checkbox' name='kid_friendly' value={this.state.kid_friendly} onChange={this.handleCheckboxChange} />
+          <p className='highlights'>Outdoor Seating</p>
+          <input className='checkbox' type='checkbox' name='outdoor_seating' value={this.state.outdoor_seating} onChange={this.handleCheckboxChange} />
+          <p className='highlights'>Vegetarian Friendly</p>
+          <input className='checkbox' type='checkbox' name='vegetarian_friendly' value={this.state.vegetarian_friendly} onChange={this.handleCheckboxChange} />
+          <p className='highlights'>Gluten Free Option</p>
+          <input className='checkbox' type='checkbox' name='gluten_free_options' value={this.state.gluten_free_options} onChange={this.handleCheckboxChange} />
+          <p className='highlights'>Farm-to-Table</p>
+          <input className='checkbox' type='checkbox' name='farm_to_table' value={this.state.farm_to_table} onChange={this.handleCheckboxChange} />
+          <p className='highlights'>Serves Alcohol</p>
+          <input className='checkbox' type='checkbox' name='serves_alcohol' value={this.state.serves_alcohol} onChange={this.handleCheckboxChange} />
+          <p className='highlights'>Fullbar</p>
+          <input className='checkbox' type='checkbox' name='fullbar' value={this.state.fullbar} onChange={this.handleCheckboxChange} />
+          <p className='highlights'>Waterfront</p>
+          <input className='checkbox' type='checkbox' name='waterfront' value={this.state.waterfront} onChange={this.handleCheckboxChange} />
+          <p className='highlights'>Live Music</p>
+          <input className='checkbox' type='checkbox' name='live_music' value={this.state.live_music} onChange={this.handleCheckboxChange} />
+          <button className='btn btn-secondary'>Save</button>
           </form>
         </section>
       </React.Fragment>

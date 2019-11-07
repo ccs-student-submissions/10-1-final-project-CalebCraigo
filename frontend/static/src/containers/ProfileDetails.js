@@ -19,19 +19,47 @@ class ProfileDetails extends Component {
       avatar: '',
       preview: '',
       loading: false,
+      kid_friendly: false,
+      outdoor_seating: false,
+      vegetarian_friendly: false,
+      gluten_free_options: false,
+      farm_to_table: false,
+      serves_alcohol: false,
+      fullbar: false,
+      waterfront: false,
+      live_music: false
     };
     this.deactivate = this.deactivate.bind(this);
     this.handleAvatarUpdate = this.handleAvatarUpdate.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
   }
 
   componentDidMount() {
+
+    let obj = {
+      'Kid Friendly': 'kid_friendly',
+      'Outdoor Seating': 'outdoor_seating',
+      'Vegetarian Friendly': 'vegetarian_friendly',
+      'Gluten Free Options': 'gluten_free_options',
+      'Farm-to-Table': 'farm_to_table',
+      'Serves Alcohol': 'serves_alcohol',
+      'Fullbar': 'fullbar',
+      'Waterfront': 'waterfront',
+      'Live Music': 'live_music'
+    }
+
     axios.get('/api/v1/profile/detail/', {headers: {'Authorization': `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`}})
     .then(res => {
-      console.log(res)
-      this.setState({profile: res.data[0]});
 
-
+    console.log(res.data[0].highlights);
+    this.setState({profile: res.data[0]});
+    res.data[0].highlights.map((highlight) => {
+      let key = highlight.text;
+      this.setState({[obj[key]]: true});
+      this.setState({loading: true});
+    });
+    console.log(this.state)
     })
     .catch(error =>{
       console.log(error);
@@ -41,9 +69,7 @@ class ProfileDetails extends Component {
 
   handleAvatarUpdate(e){
     let file = e.target.files[0];
-    // axios.patch(`/api/v1/profile/${this.state.profile.id}/`, {avatar: file});
     this.setState({avatar: file});
-
     let reader = new FileReader();
     reader.onloadend = () => {
       this.setState({preview: reader.result});
@@ -51,6 +77,9 @@ class ProfileDetails extends Component {
     reader.readAsDataURL(file);
   }
 
+  handleCheckboxChange(e) {
+    this.setState({[e.target.name]: e.target.checked});
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -62,20 +91,21 @@ class ProfileDetails extends Component {
       farm_to_table: 'Farm-to-Table',
       serves_alcohol: 'Serves Alcohol',
       fullbar: 'Fullbar',
-      waterfront: 'Waterfront'
+      waterfront: 'Waterfront',
+      live_music: 'Live Music'
     }
 
     let formData = new FormData();
     let data = this.state;
     let highlights = []
 
-    for (var key in obj) {
+    for (let key in obj) {
       if(data[key] === true) {
         highlights.push(obj[key]);
       }
     }
 
-    formData.append('avatar', this.state.avatar);
+    // formData.append('avatar', this.state.avatar);
     formData.append('highlights', JSON.stringify(highlights));
 
     axios.patch(`/api/v1/profile/${this.state.profile.id}/`, formData, {
@@ -84,23 +114,21 @@ class ProfileDetails extends Component {
       }
     })
     .then(res => {
-      let profile = [...this.state.profile];
-      this.setState({profile: profile, name:'', preview: null, image: null, created_by:'', is_active: true,});
-
-      this.props.history.push('/');
+      // let profile = [...this.state.profile];
+      // this.setState({profile: profile, name:'', preview: null, image: null, created_by:''});
+      this.setState({ navigate: true })
+      // this.props.history.push('/');
     })
     .catch(error =>{
       console.log(error);
     });
   }
 
-
   logout = () => {
     axios.post('/api/v1/rest-auth/logout/');
     localStorage.removeItem('my-app-user');
     this.setState({ navigate: true });
   }
-
 
   deactivate = () => {
     axios.patch(`/api/v1/profile/${this.state.profile.id}/`, {is_active: false});
@@ -114,40 +142,49 @@ class ProfileDetails extends Component {
       return <Redirect to='/' push={true} />;
     }
 
+    const isLoading = this.state.loading
+
+
+    console.log(this.state)
     return (
       <section className='aside-content'>
-        <form onSubmit={this.handleSubmit}>
-          <h1>{this.state.profile.name}</h1>
-          {this.state.avatar ? (
-            <img src={this.state.profile.preview} alt='preview'/>
-          ):(
-            <React.Fragment>
-            <img src={this.state.profile.avatar} alt='' />
-            <input type='file' name='avatar' onChange={this.handleAvatarUpdate}/>
-            </React.Fragment>
-          )}
-          <p>Highlights</p>
-          <p>Kid Friendly</p>
-          <input type='checkbox' name='kid_friendly' value={this.state.kid_friendly} onChange={this.handleCheckboxChange} />
-          <p>Outdoor Seating</p>
-          <input type='checkbox' name='outdoor_seating' value={this.state.outdoor_seating} onChange={this.handleCheckboxChange} />
-          <p>Vegetarian Friendly</p>
-          <input type='checkbox' name='vegetarian_friendly' value={this.state.vegetarian_friendly} onChange={this.handleCheckboxChange} />
-          <p>Gluten Free Option</p>
-          <input type='checkbox' name='gluten_free_options' value={this.state.gluten_free_options} onChange={this.handleCheckboxChange} />
-          <p>Farm-to-Table</p>
-          <input type='checkbox' name='farm_to_table' value={this.state.farm_to_table} onChange={this.handleCheckboxChange} />
-          <p>Serves Alcohol</p>
-          <input type='checkbox' name='serves_alcohol' value={this.state.serves_alcohol} onChange={this.handleCheckboxChange} />
-          <p>Fullbar</p>
-          <input type='checkbox' name='fullbar' value={this.state.fullbar} onChange={this.handleCheckboxChange} />
-          <p>Waterfront</p>
-          <input type='checkbox' name='waterfront' value={this.state.waterfront} onChange={this.handleCheckboxChange} />
-          <button>Save</button>
-        </form>
-          <a href='/'>Back</a>
-          <button onClick={this.deactivate}>Deactivate Account</button>
-          <button onClick={this.logout}>Log Out</button>
+        {isLoading ? (
+
+          <React.Fragment>
+          <form onSubmit={this.handleSubmit}>
+            <h1>{this.state.profile.name}</h1>
+
+            <img className='profileimg' src={this.state.profile.avatar} alt='' />
+
+            <p>Update Your Preferences</p>
+            <p className='highlights'>Kid Friendly</p>
+            <input className='checkbox' defaultChecked={this.state.kid_friendly} type='checkbox' name='kid_friendly' value={this.state.kid_friendly} onChange={this.handleCheckboxChange} />
+            <p className='highlights'>Outdoor Seating</p>
+            <input className='checkbox' defaultChecked={this.state.outdoor_seating} type='checkbox' name='outdoor_seating' value={this.state.outdoor_seating} onChange={this.handleCheckboxChange} />
+            <p className='highlights'>Vegetarian Friendly</p>
+            <input className='checkbox' defaultChecked={this.state.vegetarian_friendly} type='checkbox' name='vegetarian_friendly' value={this.state.vegetarian_friendly} onChange={this.handleCheckboxChange} />
+            <p className='highlights'>Gluten Free Option</p>
+            <input className='checkbox' defaultChecked={this.state.gluten_free_options} type='checkbox' name='gluten_free_options' value={this.state.gluten_free_options} onChange={this.handleCheckboxChange} />
+            <p className='highlights'>Farm-to-Table</p>
+            <input className='checkbox' defaultChecked={this.state.farm_to_table} type='checkbox' name='farm_to_table' value={this.state.farm_to_table} onChange={this.handleCheckboxChange} />
+            <p className='highlights'>Serves Alcohol</p>
+            <input className='checkbox' defaultChecked={this.state.serves_alcohol} type='checkbox' name='serves_alcohol' value={this.state.serves_alcohol} onChange={this.handleCheckboxChange} />
+            <p className='highlights'>Fullbar</p>
+            <input className='checkbox' defaultChecked={this.state.fullbar} type='checkbox' name='fullbar' value={this.state.fullbar} onChange={this.handleCheckboxChange} />
+            <p className='highlights'>Waterfront</p>
+            <input className='checkbox' defaultChecked={this.state.waterfront} type='checkbox' name='waterfront' value={this.state.waterfront} onChange={this.handleCheckboxChange} />
+            <p className='highlights'>Live Music</p>
+            <input className='checkbox' defaultChecked={this.state.live_music} type='checkbox' name='live_music' value={this.state.live_music} onChange={this.handleCheckboxChange} />
+            <button className='btn btn-secondary'>Save</button>
+          </form>
+            <a href='/'>Back</a>
+            <button className='btn btn-secondary' onClick={this.deactivate}>Deactivate Account</button>
+            <button className='btn btn-secondary' onClick={this.logout}>Log Out</button>
+          </React.Fragment>
+
+        ): (
+          null
+        )}
       </section>
     );
   };
