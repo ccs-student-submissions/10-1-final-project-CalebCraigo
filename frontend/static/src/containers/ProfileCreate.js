@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-// import '../Aside.css';
+import '../components/Aside.css';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -161,7 +161,7 @@ class ProfileCreate extends Component {
           <input className='checkbox' type='checkbox' name='waterfront' value={this.state.waterfront} onChange={this.handleCheckboxChange} />
           <p className='highlights'>Live Music</p>
           <input className='checkbox' type='checkbox' name='live_music' value={this.state.live_music} onChange={this.handleCheckboxChange} />
-          <button className='btn btn-secondary'>Save</button>
+          <button className='buttons btn btn-secondary'>Save</button>
           </form>
         </section>
       </React.Fragment>

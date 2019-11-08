@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-// import '../Aside.css';
+import '../components/Aside.css';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -158,28 +158,28 @@ class ProfileDetails extends Component {
 
             <p>Update Your Preferences</p>
             <p className='highlights'>Kid Friendly</p>
-            <input className='checkbox' defaultChecked={this.state.kid_friendly} type='checkbox' name='kid_friendly' value={this.state.kid_friendly} onChange={this.handleCheckboxChange} />
+            <input className='checkbox' checked={this.state.kid_friendly} type='checkbox' name='kid_friendly' value={this.state.kid_friendly} onChange={this.handleCheckboxChange} />
             <p className='highlights'>Outdoor Seating</p>
-            <input className='checkbox' defaultChecked={this.state.outdoor_seating} type='checkbox' name='outdoor_seating' value={this.state.outdoor_seating} onChange={this.handleCheckboxChange} />
+            <input className='checkbox' checked={this.state.outdoor_seating} type='checkbox' name='outdoor_seating' value={this.state.outdoor_seating} onChange={this.handleCheckboxChange} />
             <p className='highlights'>Vegetarian Friendly</p>
-            <input className='checkbox' defaultChecked={this.state.vegetarian_friendly} type='checkbox' name='vegetarian_friendly' value={this.state.vegetarian_friendly} onChange={this.handleCheckboxChange} />
+            <input className='checkbox' checked={this.state.vegetarian_friendly} type='checkbox' name='vegetarian_friendly' value={this.state.vegetarian_friendly} onChange={this.handleCheckboxChange} />
             <p className='highlights'>Gluten Free Option</p>
-            <input className='checkbox' defaultChecked={this.state.gluten_free_options} type='checkbox' name='gluten_free_options' value={this.state.gluten_free_options} onChange={this.handleCheckboxChange} />
+            <input className='checkbox' checked={this.state.gluten_free_options} type='checkbox' name='gluten_free_options' value={this.state.gluten_free_options} onChange={this.handleCheckboxChange} />
             <p className='highlights'>Farm-to-Table</p>
-            <input className='checkbox' defaultChecked={this.state.farm_to_table} type='checkbox' name='farm_to_table' value={this.state.farm_to_table} onChange={this.handleCheckboxChange} />
+            <input className='checkbox' checked={this.state.farm_to_table} type='checkbox' name='farm_to_table' value={this.state.farm_to_table} onChange={this.handleCheckboxChange} />
             <p className='highlights'>Serves Alcohol</p>
-            <input className='checkbox' defaultChecked={this.state.serves_alcohol} type='checkbox' name='serves_alcohol' value={this.state.serves_alcohol} onChange={this.handleCheckboxChange} />
+            <input className='checkbox' checked={this.state.serves_alcohol} type='checkbox' name='serves_alcohol' value={this.state.serves_alcohol} onChange={this.handleCheckboxChange} />
             <p className='highlights'>Fullbar</p>
-            <input className='checkbox' defaultChecked={this.state.fullbar} type='checkbox' name='fullbar' value={this.state.fullbar} onChange={this.handleCheckboxChange} />
+            <input className='checkbox' checked={this.state.fullbar} type='checkbox' name='fullbar' value={this.state.fullbar} onChange={this.handleCheckboxChange} />
             <p className='highlights'>Waterfront</p>
-            <input className='checkbox' defaultChecked={this.state.waterfront} type='checkbox' name='waterfront' value={this.state.waterfront} onChange={this.handleCheckboxChange} />
+            <input className='checkbox' checked={this.state.waterfront} type='checkbox' name='waterfront' value={this.state.waterfront} onChange={this.handleCheckboxChange} />
             <p className='highlights'>Live Music</p>
-            <input className='checkbox' defaultChecked={this.state.live_music} type='checkbox' name='live_music' value={this.state.live_music} onChange={this.handleCheckboxChange} />
-            <button className='btn btn-secondary'>Save</button>
+            <input className='checkbox' checked={this.state.live_music} type='checkbox' name='live_music' value={this.state.live_music} onChange={this.handleCheckboxChange} />
+            <button className='buttons btn btn-secondary'>Save</button>
           </form>
             <a href='/'>Back</a>
-            <button className='btn btn-secondary' onClick={this.deactivate}>Deactivate Account</button>
-            <button className='btn btn-secondary' onClick={this.logout}>Log Out</button>
+            <button className='buttons btn btn-secondary' onClick={this.deactivate}>Deactivate Account</button>
+            <button className='buttons btn btn-secondary' onClick={this.logout}>Log Out</button>
           </React.Fragment>
 
         ): (

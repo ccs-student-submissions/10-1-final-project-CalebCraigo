@@ -100,7 +100,7 @@ class Base extends Component {
           {this.state.start === 60 ? (
             <p>Stop being picky! Shut up and Eat!</p>
           ):(
-            <button className='btn btn-secondary btn-lg' type='button' onClick={this.randomGenerator}>Random Generator</button>
+            <button className='buttons btn btn-secondary btn-lg' type='button' onClick={this.randomGenerator}>Random Generator</button>
           )}
           {/* only show RestaurantDetail component if random restaurant was selected */}
           {this.state.restaurantSelected ? (

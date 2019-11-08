@@ -3,7 +3,7 @@ aside {
   top: 2.5%;
   margin-left: 1.5%;
 
-  height: 90vh;
+  height: 95vh;
   /* opacity: .9; */
   text-align: center;
   border: solid 1px #282C2F;
@@ -20,4 +20,8 @@ aside {
 
 .highlights {
   margin-bottom: 0;
+}
+
+.buttons {
+  margin: 1%;
 }
