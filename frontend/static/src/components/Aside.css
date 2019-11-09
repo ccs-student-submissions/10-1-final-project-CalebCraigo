@@ -2,15 +2,32 @@ aside {
   position: absolute;
   top: 2.5%;
   margin-left: 1.5%;
-
   height: 95vh;
-  /* opacity: .9; */
+  opacity: .9;
   text-align: center;
   border: solid 1px #282C2F;
   border-radius: 5px;
   background-color: #282C2F;
   padding: 20px;
   color: #fff;
+}
+
+.asidehome {
+  position: absolute;
+  top: 20%;
+  margin-left: 28%;
+  height: 50vh;
+  width: 40%;
+  opacity: .9;
+  text-align: center;
+  border: solid 1px #282C2F;
+  border-radius: 5px;
+  background-color: #282C2F;
+  padding: 20px;
+  color: #fff;
+}
+.asideContent{
+  opacity: 1 !important;
 }
 
 .profileimg {
@@ -24,4 +41,8 @@ aside {
 
 .buttons {
   margin: 1%;
+}
+
+.buttons:hover {
+  background-color: #242729;
 }

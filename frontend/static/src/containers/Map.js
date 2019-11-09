@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 // import axios from 'axios';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps";
-import Aside from './../components/Aside.js'
+
 
 // Import custom styles to customize the style of Google Map
 const styles = require('./GoogleMapStyles.json');

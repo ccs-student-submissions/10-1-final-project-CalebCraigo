@@ -53,7 +53,7 @@ class Login extends Component {
           <label htmlFor="password">Password</label>
           <input id='password' type='password' name='password' value={this.state.password} onChange={this.handleChange} placeholder='Enter password' required/>
         </p>
-        <button>Login</button>
+        <button className='buttons btn btn-secondary'>Login</button>
         <a href='/'>Back</a>
       </form>
     )

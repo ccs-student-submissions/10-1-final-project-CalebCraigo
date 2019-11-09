@@ -29,28 +29,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         highlights_data = json.loads(self.context['request'].data['highlights'])
-        # instance.highlights= validated_data.get('highlights', instance.highlights)
-        profile = UserProfile.objects.update(**validated_data)
-
+        instance.highlights.clear()
 
         for highlight in highlights_data:
-            instance.highlight = Highlight.objects.get('text', instance.highlight)
-            profile.highlights.add(highlight)
-        return profile
+            highlight = Highlight.objects.get(text=highlight)
+            instance.highlights.add(highlight)
 
-# class MasterSerializer(serializers.ModelSerializer):
-#     skill_ids = serializers.ListField(write_only=True)
-#
-#     def update(self, instance, validated_data):
-#
-#     # ...
-#     validated_data['skill_ids'] = filter(None, validated_data['skill_ids'])
-#     for skill_id in validated_data['skill_ids']:
-#         skill = Skill.objects.get(pk=skill_id)
-#         instance.skills.add(skill)
-#
-#     return instance
-
+        return instance
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -57,7 +57,7 @@ class SignUp extends Component {
           <label htmlFor="password">Password 2</label>
           <input id='password2' type='password' name='password2' value={this.state.password2} onChange={this.handleChange} placeholder='Enter password again' required/>
         </p>
-        <button>Sign Up</button>
+        <button className='buttons btn btn-secondary'>Sign Up</button>
         <a href='/'>Back</a>
       </form>
     )
