@@ -158,6 +158,7 @@ class ProfileDetails extends Component {
 
             <p>Update Your Preferences</p>
 
+          <section>
             <input className='checkbox' id='kid_friendly' checked={this.state.kid_friendly} type='checkbox' name='kid_friendly' value={this.state.kid_friendly} onChange={this.handleCheckboxChange} />
             <label for="kid_friendly" class="checkbox">Kid Friendly</label>
 
@@ -184,6 +185,7 @@ class ProfileDetails extends Component {
 
             <input className='checkbox' id='live_music' checked={this.state.live_music} type='checkbox' name='live_music' value={this.state.live_music} onChange={this.handleCheckboxChange} />
             <label for="live_music" class="checkbox">Live Music</label>
+            </section>
             <a href='/' className='btn btn-secondary'>Back</a>
             <button className='buttons btn btn-secondary'>Save</button>
           </form>

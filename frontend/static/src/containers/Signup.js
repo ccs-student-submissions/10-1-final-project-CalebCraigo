@@ -54,11 +54,11 @@ class SignUp extends Component {
           <input id='password' type='password' name='password1' value={this.state.password} onChange={this.handleChange} placeholder='Enter password' required/>
         </p>
         <p>
-          <label htmlFor="password">Password 2</label>
+          <label htmlFor="password">Re-enter Password</label>
           <input id='password2' type='password' name='password2' value={this.state.password2} onChange={this.handleChange} placeholder='Enter password again' required/>
         </p>
         <button className='buttons btn btn-secondary'>Sign Up</button>
-        <a href='/'>Back</a>
+        <a className='navbtn btn btn-secondary' href='/'>Back</a>
       </form>
     )
   }

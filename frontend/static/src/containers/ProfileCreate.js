@@ -132,17 +132,18 @@ class ProfileCreate extends Component {
       <React.Fragment>
         <section>
           <form onSubmit={this.handleSubmit}>
-          <p>Create Your Profile</p>
-          <p>Enter Your Name</p>
-          <input type='text' name='name' value={this.state.name} onChange={this.handleChange}/>
-          <p>Add a picture!</p>
+          <h2>Create Your Profile</h2>
+          <p className='nameinput'>Enter Your Name</p>
+          <input className='nameinput' type='text' name='name' value={this.state.name} onChange={this.handleChange}/>
+          <p className='avatarinput'>Add a picture!</p>
           {this.state.avatar ? (
-            <img className='profileimg' src={this.state.preview} alt='preview'/>
+            <img className='profileimg avatarinput' src={this.state.preview} alt='preview'/>
           ):(
-            <input type='file' name='avatar' onChange={this.handleAvatarChange}/>
+            <input className='avatarinput' type='file' name='avatar' onChange={this.handleAvatarChange}/>
           )}
 
           <p>Select some preferences to help us make a selection for you!</p>
+          <section>
             <input className='checkbox' id='kid_friendly' checked={this.state.kid_friendly} type='checkbox' name='kid_friendly' value={this.state.kid_friendly} onChange={this.handleCheckboxChange} />
             <label for="kid_friendly" class="checkbox">Kid Friendly</label>
 
@@ -169,6 +170,7 @@ class ProfileCreate extends Component {
 
             <input className='checkbox' id='live_music' checked={this.state.live_music} type='checkbox' name='live_music' value={this.state.live_music} onChange={this.handleCheckboxChange} />
             <label for="live_music" class="checkbox">Live Music</label>
+            </section>
             <button className='buttons btn btn-secondary'>Save</button>
           </form>
         </section>

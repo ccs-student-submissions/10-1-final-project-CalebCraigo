@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-// import axios from 'axios';
+import axios from 'axios';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps";
 
 
@@ -15,10 +15,28 @@ class MyMap extends Component {
       restaurantLocation: { lat: 32, lng: 32},
       userLocation: { lat: 32, lng: 32},
       loading: true,
+      bounds: null,
+      profile: {},
+      markerImage: '',
     };
+    // this.onBoundsChanged = this.onBoundsChanged.bind(this)
   }
 
-  componentDidMount(props) {
+  componentDidMount() {
+    let headers = null;
+
+    if(localStorage.getItem('my-app-user')) {
+      headers = {
+        'Authorization': `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`
+      }
+    }
+    axios.get(`/api/v1/profile/detail/`, {headers: headers})
+    .then(res => {
+
+    console.log(res.data[0].highlights);
+    this.setState({profile: res.data[0]});
+    this.setState({markerImage: this.state.profile.avatar})
+    })
 
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -27,6 +45,7 @@ class MyMap extends Component {
         this.setState({
           userLocation: { lat: latitude, lng: longitude },
           loading: false
+
         });
         // console.log(this.state.userLocation)
       },
@@ -34,6 +53,7 @@ class MyMap extends Component {
         this.setState({ loading: false });
       }
     );
+
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -42,11 +62,27 @@ class MyMap extends Component {
 
       }
       // console.log(this.state.restaurantLocation.lat)
-}
+  }
+
+  // handleMapMounted = (map) => {
+  //   const { path } = this.props
+  //
+  //   this._map = map
+  //   if (map) {
+  //   const bounds = new google.maps.LatLngBounds();
+  //
+  //   path.map(position => {
+  //     bounds.extend(position)
+  //   })
+  //   this._map.fitBounds(bounds)
+  //   }
+  // }
+
 
 
   render() {
-
+    console.log(this.state.profile)
+    console.log(this.state.markerImage)
     // console.log('map props', this.state.restaurantLocation, this.state.userLocation);
     const { loading, userLocation, restaurantLocation } = this.state;
     if (loading) {
@@ -66,10 +102,27 @@ class MyMap extends Component {
           keyboardShortcuts: false,
           scaleControl: true,
           scrollwheel: true,
-          styles: styles}}
+          styles: styles
+          }}
+
         >
-        <Marker position= { userLocation } />
-        <Marker position={ restaurantLocation }/>
+        <Marker
+        position= { userLocation }
+        title='Your Location'
+        icon={{
+          url: '/../user-circle-solid.svg',
+          scaledSize: new window.google.maps.Size(30, 30)
+        }}
+
+         />
+        <Marker
+        position={ restaurantLocation }
+        title='Restaurant Location'
+        icon={{
+          url:'/../utensils-solid.svg',
+          scaledSize: new window.google.maps.Size(30, 30)
+        }}
+        />
         </GoogleMap>
 
     )
@@ -89,6 +142,7 @@ export default function Map(props){
                 containerElement={<div style={{height: "100% "}} />}
                 mapElement ={<div style={{height: "100% "}} />}
                 restaurantLocation={props.restaurantLocation}
+
                 />
         </div>
     )

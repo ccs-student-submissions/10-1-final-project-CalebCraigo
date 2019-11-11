@@ -54,7 +54,7 @@ class Login extends Component {
           <input id='password' type='password' name='password' value={this.state.password} onChange={this.handleChange} placeholder='Enter password' required/>
         </p>
         <button className='buttons btn btn-secondary'>Login</button>
-        <a href='/'>Back</a>
+        <a className='navbtn btn btn-secondary' href='/'>Back</a>
       </form>
     )
   }

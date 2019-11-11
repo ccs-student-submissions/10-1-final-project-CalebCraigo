@@ -56,7 +56,7 @@
 }
 
 .navbtn {
-  margin-bottom: 1%;
+  margin: 1%;
 }
 
 .profileimg {
@@ -72,9 +72,15 @@
   margin: 1%;
 }
 
-/* .buttons:hover {
-  background-color: #242729;
-} */
+.nameinput{
+  display:inline-block;
+  margin:1%;
+}
+
+.avatarinput {
+  display: inline-block;
+  margin: 1%;
+}
 
 input[type=checkbox]{
     display:none;

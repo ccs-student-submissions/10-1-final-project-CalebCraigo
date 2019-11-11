@@ -19,12 +19,10 @@ class Home extends Component {
         {localStorage.getItem('my-app-user') ? (
           <a className='navbtn btn btn-secondary' href='/profile/'>Profile</a>
         ): (
-
-          <div>
-            <a className='navbtn btn btn-secondary' href='/login/'>Sign In</a>
-            <a className='navbtn btn btn-secondary' href='/signup/'>Sign up</a>
-
-          </div>
+          <React.Fragment>
+          <a className='navbtn btn btn-secondary' href='/login/'>Sign In</a>
+          <a className='navbtn btn btn-secondary' href='/signup/'>Sign up</a>
+          </React.Fragment>
 
         )}
     </div>
