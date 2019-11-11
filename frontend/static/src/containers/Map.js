@@ -19,6 +19,7 @@ class MyMap extends Component {
       profile: {},
       markerImage: '',
     };
+    // this.handleMapMounted = this.handleMapMounted.bind(this)
     // this.onBoundsChanged = this.onBoundsChanged.bind(this)
   }
 
@@ -69,7 +70,7 @@ class MyMap extends Component {
   //
   //   this._map = map
   //   if (map) {
-  //   const bounds = new google.maps.LatLngBounds();
+  //   const bounds = new window.google.maps.LatLngBounds();
   //
   //   path.map(position => {
   //     bounds.extend(position)
@@ -80,7 +81,7 @@ class MyMap extends Component {
 
 
 
-  render() {
+  render(props) {
     console.log(this.state.profile)
     console.log(this.state.markerImage)
     // console.log('map props', this.state.restaurantLocation, this.state.userLocation);
@@ -102,9 +103,14 @@ class MyMap extends Component {
           keyboardShortcuts: false,
           scaleControl: true,
           scrollwheel: true,
-          styles: styles
-          }}
+          styles: styles,
 
+          }}
+        onLoad={mymap => {
+          const bounds = new window.google.maps.LatLngBounds();
+          mymap.fitBounds(bounds)
+          console.log(bounds)
+        }}
         >
         <Marker
         position= { userLocation }

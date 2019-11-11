@@ -39,9 +39,7 @@
     top: 20%;
     height: 50vh;
   }
-  /* 50% {
-    margin-left: 14%;
-    } */
+
   100% {
     margin-left: 1.5%;
     width: 375px;
@@ -108,5 +106,8 @@ input[type=checkbox]:checked + label{
    [id='aside'] {
      width: 100%;
      margin:0;
+     height: 45vh;
+     top: 55%;
+
    }
  }
