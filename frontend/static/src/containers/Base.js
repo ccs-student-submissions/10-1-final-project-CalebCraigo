@@ -103,12 +103,12 @@ class Base extends Component {
     return (
       <div className='row'>
         <Map restaurantLocation={this.state.restaurant ? {lat: Number(this.state.restaurant.restaurant.location.latitude), lng: Number(this.state.restaurant.restaurant.location.longitude)} : {lat: 32, lng: 32}}/>
-        <aside className={this.state.aside === false ? 'asidehome' : null}>
+        <aside id='aside' className= {this.state.aside === false ? 'asidehome' : 'aside'}>
           <div className='asideContent'>
             {this.props.children}
             {/* only show RestaurantDetail component if random restaurant was selected */}
             {this.state.restaurantSelected ? (
-              <RestaurantDetail restaurant={this.state.restaurant} />
+              <RestaurantDetail restaurant={this.state.restaurant} profile={this.state.profile} />
             ) : (
               null
             )}

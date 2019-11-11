@@ -16,12 +16,15 @@ class RestaurantDetail extends Component {
   }
 
   render(props, state){
-
+    console.log(this.props)
     return (
       <div>
         <h2>{this.props.restaurant.restaurant.name}</h2>
+
         <p>{this.props.restaurant.restaurant.cuisines}</p>
+        <div>
         <p>{this.props.restaurant.restaurant.timings}</p>
+        </div>
 
       </div>
     );

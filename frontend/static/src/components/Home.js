@@ -13,16 +13,16 @@ class Home extends Component {
   render() {
     return (
       <div className='aside-box'>
-        <h1>Shut Up & Eat</h1>
+        <h1 className='header'>Shut Up & Eat</h1>
 
         {/* only show profile link if user is logged in */}
         {localStorage.getItem('my-app-user') ? (
-          <a href='/profile/'>Profile</a>
+          <a className='navbtn btn btn-secondary' href='/profile/'>Profile</a>
         ): (
 
           <div>
-            <a href='/login/'>Sign In</a>
-            <a href='/signup/'>Sign up</a>
+            <a className='navbtn btn btn-secondary' href='/login/'>Sign In</a>
+            <a className='navbtn btn btn-secondary' href='/signup/'>Sign up</a>
 
           </div>
 
