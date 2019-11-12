@@ -2,6 +2,9 @@ import React, {Component} from "react";
 import axios from 'axios';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps";
 
+import userImage from '../images/user-circle-solid.svg';
+import restaurantImage from '../images/utensils-solid.svg'
+
 
 // Import custom styles to customize the style of Google Map
 const styles = require('./GoogleMapStyles.json');
@@ -58,6 +61,7 @@ class MyMap extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+
       return {
         restaurantLocation: {lat:props.restaurantLocation.lat, lng:props.restaurantLocation.lng}
 
@@ -65,19 +69,19 @@ class MyMap extends Component {
       // console.log(this.state.restaurantLocation.lat)
   }
 
-  // handleMapMounted = (map) => {
-  //   const { path } = this.props
-  //
-  //   this._map = map
-  //   if (map) {
-  //   const bounds = new window.google.maps.LatLngBounds();
-  //
-  //   path.map(position => {
-  //     bounds.extend(position)
-  //   })
-  //   this._map.fitBounds(bounds)
-  //   }
-  // }
+  handleMapMounted = (map) => {
+    // const { path } = this.props
+    //
+    // this._map = map
+    // if (map) {
+    // const bounds = new window.google.maps.LatLngBounds();
+    //
+    // path.map(position => {
+    //   bounds.extend(position)
+    // })
+    // this._map.fitBounds(bounds)
+    // }
+  }
 
 
 
@@ -92,43 +96,52 @@ class MyMap extends Component {
 
     // console.log('userLocation', userLocation)
     // console.log('restaurantLocation', restaurantLocation)
+    let bounds = new window.google.maps.LatLngBounds();
+    let latLng = new window.google.maps.LatLng(this.state.userLocation.lat, this.state.userLocation.lng);
+    bounds.extend(latLng);
+
+    latLng = new window.google.maps.LatLng(this.state.restaurantLocation.lat, this.state.restaurantLocation.lng);
+    bounds.extend(latLng);
+    // bounds.extend()
+    // const locations = [this.state.userLocation, this.state.restaurantLocation];
+    // const coordinates = locations.map()
+    // locations.push((this.state.userLocation).push(this.state.restaurantLocation);)
+
+
     return (
 
         <GoogleMap
-        defaultZoom={15}
-        defaultCenter={ userLocation }
-        defaultOptions={{
-          disableDefaultUI: true,
-          draggable: true,
-          keyboardShortcuts: false,
-          scaleControl: true,
-          scrollwheel: true,
-          styles: styles,
+          ref={map => map && map.fitBounds(bounds, {padding: 120})}
+          defaultZoom={15}
+          minZoom={5}
+          defaultCenter={ userLocation }
+          defaultOptions={{
+            disableDefaultUI: true,
+            draggable: true,
+            keyboardShortcuts: false,
+            scaleControl: true,
+            scrollwheel: true,
+            styles: styles,
 
+            }}
+          >
+          <Marker
+          position= { userLocation }
+          title='Your Location'
+          icon={{
+            url: userImage,
+            scaledSize: new window.google.maps.Size(30, 30)
           }}
-        onLoad={mymap => {
-          const bounds = new window.google.maps.LatLngBounds();
-          mymap.fitBounds(bounds)
-          console.log(bounds)
-        }}
-        >
-        <Marker
-        position= { userLocation }
-        title='Your Location'
-        icon={{
-          url: '/../user-circle-solid.svg',
-          scaledSize: new window.google.maps.Size(30, 30)
-        }}
 
-         />
-        <Marker
-        position={ restaurantLocation }
-        title='Restaurant Location'
-        icon={{
-          url:'/../utensils-solid.svg',
-          scaledSize: new window.google.maps.Size(30, 30)
-        }}
-        />
+           />
+          <Marker
+          position={ restaurantLocation }
+          title='Restaurant Location'
+          icon={{
+            url: restaurantImage,
+            scaledSize: new window.google.maps.Size(30, 30)
+          }}
+          />
         </GoogleMap>
 
     )
