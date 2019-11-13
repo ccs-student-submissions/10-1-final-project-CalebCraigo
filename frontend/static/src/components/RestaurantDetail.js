@@ -17,18 +17,30 @@ class RestaurantDetail extends Component {
 
   render(props, state){
     let highlights = (this.props.restaurant.restaurant.highlights)
-    let highlightStr = highlights.toString()
-    let highlightNewStr = highlightStr.replace(/,/g, ', ');
-    console.log(highlightNewStr)
-
-
+    let restaurantHighlightStr = highlights.slice(0, 5).toString()
+    let restaurantHighlightNewStr = restaurantHighlightStr.replace(/,/g, ', ');
+    console.log('restaurant', highlights)
     let userHighlight = []
-    console.log(userHighlight)
+    console.log('user', userHighlight)
     let userHighlights = (this.props.profile.highlights)
-    console.log(userHighlights)
-    // let highlights = [...this.state.profile.highlights]
+    userHighlights.forEach(function(item){
+      return userHighlight.push(item.text)
+    })
 
-    console.log(this.props)
+
+    const finalarray =[];
+    function compare(arr1, arr2) {
+    arr1.forEach((e1)=>arr2.forEach((e2)=>
+      {if(e1 === e2){
+        finalarray.push(e1)
+      }
+    }
+  ));
+  }
+
+    compare(userHighlight, highlights)
+    let highlightStr = finalarray.toString()
+    let highlightNewStr = highlightStr.replace(/,/g, ', ');
     return (
       <div>
         <h5>Name</h5>
@@ -39,8 +51,18 @@ class RestaurantDetail extends Component {
         <p>{this.props.restaurant.restaurant.location.address}</p>
         <h5>Hours</h5>
         <p>{this.props.restaurant.restaurant.timings}</p>
-        <h5>Highlights</h5>
-        <p>{highlightNewStr}</p>
+        {highlightNewStr ? (
+          <React.Fragment>
+            <h5>Highlights</h5>
+            <p>{highlightNewStr}</p>
+          </React.Fragment>
+        ): (
+          <React.Fragment>
+            <h5>Highlights</h5>
+            <p>{restaurantHighlightNewStr}</p>
+          </React.Fragment>
+        )}
+
 
 
 

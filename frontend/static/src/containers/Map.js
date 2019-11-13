@@ -37,7 +37,7 @@ class MyMap extends Component {
     axios.get(`/api/v1/profile/detail/`, {headers: headers})
     .then(res => {
 
-    console.log(res.data[0].highlights);
+
     this.setState({profile: res.data[0]});
     this.setState({markerImage: this.state.profile.avatar})
     })
@@ -86,8 +86,7 @@ class MyMap extends Component {
 
 
   render(props) {
-    console.log(this.state.profile)
-    console.log(this.state.markerImage)
+
     // console.log('map props', this.state.restaurantLocation, this.state.userLocation);
     const { loading, userLocation, restaurantLocation } = this.state;
     if (loading) {

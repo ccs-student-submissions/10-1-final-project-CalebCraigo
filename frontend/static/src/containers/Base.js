@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
 import Map from './Map.js';
 import RestaurantDetail from '../components/RestaurantDetail.js';
-import Home from '../components/Home.js';
 import axios from 'axios';
 import '../Base.css';
 
@@ -90,7 +88,7 @@ class Base extends Component {
   }
 
   render(){
-    console.log(this.props.location);
+
 
     // const children = React.Children.map(this.props.children, (child, index) => {
     //   return React.cloneElement(child, {

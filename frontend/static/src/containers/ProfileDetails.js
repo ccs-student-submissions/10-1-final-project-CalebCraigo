@@ -145,7 +145,6 @@ class ProfileDetails extends Component {
     const isLoading = this.state.loading
 
 
-    console.log(this.state)
     return (
       <section>
         {isLoading ? (

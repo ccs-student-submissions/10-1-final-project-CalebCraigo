@@ -10,8 +10,8 @@ import React, {Component} from "react";
 class Home extends Component {
 
 
-  render(props) {
-    console.log(props)
+  render() {
+
     return (
       <div className='aside-box'>
         <h1 className='header'>Shut Up & Eat</h1>
