@@ -5,28 +5,36 @@ class RestaurantDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newrestaurant: [],
+      userHighlights: [],
+      highlights: [],
     };
   }
 
-  componentDidMount(props) {
-    this.setState({newrestaurant: this.props.restaurant})
-
-
+  // componentDidMount(props) {
+  //   this.setState({newrestaurant: this.props.restaurant})
+  // }
+  static getDerivedStateFromProps(props, state) {
+      return {
+        highlights: props.restaurant.restaurant.highlights,
+        userHighlights: props.profile.highlights
+      }
   }
 
+
   render(props, state){
-    let highlights = (this.props.restaurant.restaurant.highlights)
-    let restaurantHighlightStr = highlights.slice(0, 5).toString()
+    let restaurantHighlightStr = this.state.highlights.slice(0, 5).toString()
     let restaurantHighlightNewStr = restaurantHighlightStr.replace(/,/g, ', ');
-    console.log('restaurant', highlights)
+    console.log('restaurant', this.state.highlights)
+
     let userHighlight = []
     console.log('user', userHighlight)
-    let userHighlights = (this.props.profile.highlights)
-    userHighlights.forEach(function(item){
-      return userHighlight.push(item.text)
-    })
-
+    console.log(this.state.userHighlights)
+    if (localStorage.getItem('my-app-user')) {
+    let userHighlights = (this.state.userHighlights)
+      userHighlights.forEach(function(item){
+        return userHighlight.push(item.text)
+      })
+    }
 
     const finalarray =[];
     function compare(arr1, arr2) {
@@ -38,7 +46,7 @@ class RestaurantDetail extends Component {
   ));
   }
 
-    compare(userHighlight, highlights)
+    compare(userHighlight, this.state.highlights)
     let highlightStr = finalarray.toString()
     let highlightNewStr = highlightStr.replace(/,/g, ', ');
     return (

@@ -36,8 +36,6 @@ class MyMap extends Component {
     }
     axios.get(`/api/v1/profile/detail/`, {headers: headers})
     .then(res => {
-
-
     this.setState({profile: res.data[0]});
     this.setState({markerImage: this.state.profile.avatar})
     })
@@ -45,66 +43,33 @@ class MyMap extends Component {
     navigator.geolocation.getCurrentPosition(
       position => {
         const { latitude, longitude } = position.coords;
-
         this.setState({
           userLocation: { lat: latitude, lng: longitude },
           loading: false
-
         });
-        // console.log(this.state.userLocation)
       },
       () => {
         this.setState({ loading: false });
       }
     );
-
   }
 
   static getDerivedStateFromProps(props, state) {
-
       return {
         restaurantLocation: {lat:props.restaurantLocation.lat, lng:props.restaurantLocation.lng}
-
       }
-      // console.log(this.state.restaurantLocation.lat)
   }
-
-  handleMapMounted = (map) => {
-    // const { path } = this.props
-    //
-    // this._map = map
-    // if (map) {
-    // const bounds = new window.google.maps.LatLngBounds();
-    //
-    // path.map(position => {
-    //   bounds.extend(position)
-    // })
-    // this._map.fitBounds(bounds)
-    // }
-  }
-
-
 
   render(props) {
-
-    // console.log('map props', this.state.restaurantLocation, this.state.userLocation);
     const { loading, userLocation, restaurantLocation } = this.state;
     if (loading) {
       return null;
     }
-
-    // console.log('userLocation', userLocation)
-    // console.log('restaurantLocation', restaurantLocation)
     let bounds = new window.google.maps.LatLngBounds();
     let latLng = new window.google.maps.LatLng(this.state.userLocation.lat, this.state.userLocation.lng);
     bounds.extend(latLng);
-
     latLng = new window.google.maps.LatLng(this.state.restaurantLocation.lat, this.state.restaurantLocation.lng);
     bounds.extend(latLng);
-    // bounds.extend()
-    // const locations = [this.state.userLocation, this.state.restaurantLocation];
-    // const coordinates = locations.map()
-    // locations.push((this.state.userLocation).push(this.state.restaurantLocation);)
 
 
     return (

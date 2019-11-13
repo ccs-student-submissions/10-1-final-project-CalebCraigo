@@ -90,16 +90,6 @@ class Base extends Component {
   render(){
 
 
-    // const children = React.Children.map(this.props.children, (child, index) => {
-    //   return React.cloneElement(child, {
-    //     index,
-    //     startingInt: index === this.state.start,
-    //     randomGenerator: () => this.randomGenerator
-    //
-    //   })
-    //   console.log(startingInt)
-    // })
-
     return (
       <div className='row'>
         <Map restaurantLocation={this.state.restaurant ? {lat: Number(this.state.restaurant.restaurant.location.latitude), lng: Number(this.state.restaurant.restaurant.location.longitude)} : {lat: 34.8526, lng: -82.3940}}/>

@@ -57,9 +57,8 @@ class ProfileDetails extends Component {
     res.data[0].highlights.map((highlight) => {
       let key = highlight.text;
       this.setState({[obj[key]]: true});
-      this.setState({loading: true});
     });
-    console.log(this.state)
+    console.log(this.state.loading)
     })
     .catch(error =>{
       console.log(error);
@@ -105,19 +104,15 @@ class ProfileDetails extends Component {
       }
     }
 
-    // formData.append('avatar', this.state.avatar);
     formData.append('highlights', JSON.stringify(highlights));
-
     axios.patch(`/api/v1/profile/${this.state.profile.id}/`, formData, {
       headers : {
-        'content-type': 'multipart/form-data'
+        'content-type': 'multipart/form-data',
+        'Authorization': `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`,
       }
     })
     .then(res => {
-      // let profile = [...this.state.profile];
-      // this.setState({profile: profile, name:'', preview: null, image: null, created_by:''});
       this.setState({ navigate: true })
-      // this.props.history.push('/');
     })
     .catch(error =>{
       console.log(error);
@@ -147,7 +142,7 @@ class ProfileDetails extends Component {
 
     return (
       <section>
-        {isLoading ? (
+
 
           <React.Fragment>
           <form onSubmit={this.handleSubmit}>
@@ -195,9 +190,7 @@ class ProfileDetails extends Component {
             <button className='buttons btn btn-secondary' onClick={this.logout}>Log Out</button>
           </React.Fragment>
 
-        ): (
-          null
-        )}
+
       </section>
     );
   };
