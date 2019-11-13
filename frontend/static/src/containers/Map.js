@@ -71,11 +71,12 @@ class MyMap extends Component {
     latLng = new window.google.maps.LatLng(this.state.restaurantLocation.lat, this.state.restaurantLocation.lng);
     bounds.extend(latLng);
 
-
+    console.log('bounds', bounds);
+  
     return (
 
         <GoogleMap
-          ref={map => map && map.fitBounds(bounds, {padding: 120})}
+          ref={map => map && map.fitBounds(bounds, {padding: {top: 300, bottom: 300, left: 300, right: 300}})}
           defaultZoom={15}
           minZoom={5}
           defaultCenter={ userLocation }

@@ -26,6 +26,9 @@ class Base extends Component {
   }
 
   componentDidMount(props) {
+
+    console.log('base js did mount');
+
     navigator.geolocation.getCurrentPosition(
       position => {
         const { latitude, longitude } = position.coords;
@@ -49,16 +52,26 @@ class Base extends Component {
     .then(res => {
 
       let highlight = []
-      this.setState({profile: res.data[0]})
-      this.setState({highlights: this.state.profile.highlights})
-      let highlights = [...this.state.profile.highlights]
+      let highlights = res.data[0].highlights
       highlights.forEach(function(item){
         return highlight.push(item.text)
       })
       let highlightStr = highlight.toString()
       let highlightNewStr = highlightStr.replace(/,/g, ' ');
       let highlightsURL = encodeURI(highlightNewStr)
-      this.setState({highlight: highlightsURL})
+
+      this.setState({profile: res.data[0], highlight});
+
+      // this.setState({profile: res.data[0]});
+      //
+      // let highlights = [...this.state.profile.highlights]
+      // highlights.forEach(function(item){
+      //   return highlight.push(item.text)
+      // })
+      // let highlightStr = highlight.toString()
+      // let highlightNewStr = highlightStr.replace(/,/g, ' ');
+      // let highlightsURL = encodeURI(highlightNewStr)
+      // this.setState({highlight: highlightsURL})
     })
     .catch(error =>{
       console.log(error);
@@ -69,9 +82,8 @@ class Base extends Component {
     axios.get(`https://developers.zomato.com/api/v2.1/search?lat=${this.state.userCoords.lat}&lon=${this.state.userCoords.lng}&start=${this.state.start}&count=20&radius=2000&q=${this.state.highlight}&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
     .then(res => {
       let restaurant = res.data.restaurants[Math.floor(Math.random()*res.data.restaurants.length)];
-      this.setState({restaurant, start: this.state.start + 20, count: this.state.count + 1});
-      this.setState({restaurantSelected: true});
-      this.setState({ aside: true });
+      this.setState({restaurant, start: this.state.start + 20, count: this.state.count + 1, restaurantSelected: true, aside: true});
+
 
       })
     .catch(error => {
@@ -88,7 +100,7 @@ class Base extends Component {
   }
 
   render(){
-
+    console.log('base js is render');
 
     return (
       <div className='row'>

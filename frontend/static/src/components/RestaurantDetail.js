@@ -21,14 +21,16 @@ class RestaurantDetail extends Component {
   }
 
 
-  render(props, state){
+  render(){
+
+    console.log('props of detail', this.props)
+
+
     let restaurantHighlightStr = this.state.highlights.slice(0, 5).toString()
     let restaurantHighlightNewStr = restaurantHighlightStr.replace(/,/g, ', ');
     console.log('restaurant', this.state.highlights)
 
     let userHighlight = []
-    console.log('user', userHighlight)
-    console.log(this.state.userHighlights)
     if (localStorage.getItem('my-app-user')) {
     let userHighlights = (this.state.userHighlights)
       userHighlights.forEach(function(item){
@@ -49,6 +51,8 @@ class RestaurantDetail extends Component {
     compare(userHighlight, this.state.highlights)
     let highlightStr = finalarray.toString()
     let highlightNewStr = highlightStr.replace(/,/g, ', ');
+
+
     return (
       <div>
         <h5>Name</h5>
