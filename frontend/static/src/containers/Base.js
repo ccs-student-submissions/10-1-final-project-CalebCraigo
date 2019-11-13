@@ -12,6 +12,7 @@ class Base extends Component {
     this.state = {
       userCoords: null,
       aside: false,
+      toggle: false,
       restaurant: null,
       restaurantSelected: false,
       profile:{},
@@ -22,7 +23,7 @@ class Base extends Component {
     };
     this.randomGenerator = this.randomGenerator.bind(this);
     this.generateButton = this.generateButton.bind(this);
-    // this.userPreference = this.userPreference.bind(this);
+    this.minimize = this.minimize.bind(this);
   }
 
   componentDidMount(props) {
@@ -99,20 +100,32 @@ class Base extends Component {
     return null;
   }
 
+  minimize() {
+    this.setState({toggle: true})
+    console.log(this.state.toggle)
+  }
+
+
   render(){
     console.log('base js is render');
 
     return (
       <div className='row'>
         <Map restaurantLocation={this.state.restaurant ? {lat: Number(this.state.restaurant.restaurant.location.latitude), lng: Number(this.state.restaurant.restaurant.location.longitude)} : {lat: 34.8526, lng: -82.3940}}/>
-        <aside id='aside' className= {this.state.aside === false ? 'asidehome' : 'aside'}>
+        <aside id='aside' className= {this.state.aside === false ? 'asidehome' : 'aside'} >
           <div className='asideContent'>
+            {this.state.aside === true && <button className='togglebtn' onClick={this.minimize}>-</button>}
+            {this.state.toggle === true ?
+              null
+            :
+            <div>
             {this.props.children}
             {/* only show RestaurantDetail component if random restaurant was selected */}
-            {this.state.restaurantSelected && <RestaurantDetail restaurant={this.state.restaurant} profile={this.state.profile} />}
+            {this.state.restaurantSelected && <RestaurantDetail restaurant={this.state.restaurant} profile={this.state.profile} userCoords={this.state.userCoords} />}
             {this.props.location.pathname === '/' && this.state.count !== 3 && <button className='buttons btn btn-secondary btn-lg' type='button' onClick={this.randomGenerator}>Let's Eat!</button>}
             {this.state.count === 3 && <div>You are too picky!</div>}
-
+            </div>
+          }
           </div>
         </aside>
       </div>

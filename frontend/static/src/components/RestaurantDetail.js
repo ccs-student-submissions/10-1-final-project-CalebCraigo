@@ -7,7 +7,9 @@ class RestaurantDetail extends Component {
     this.state = {
       userHighlights: [],
       highlights: [],
+      userCoords: {},
     };
+    this.googleDirections = this.googleDirections.bind(this)
   }
 
   // componentDidMount(props) {
@@ -16,20 +18,30 @@ class RestaurantDetail extends Component {
   static getDerivedStateFromProps(props, state) {
       return {
         highlights: props.restaurant.restaurant.highlights,
-        userHighlights: props.profile.highlights
+        userHighlights: props.profile.highlights,
+        userCoords : props.userCoords
       }
+  }
+
+  googleDirections(){
+  let url = 'https://www.google.com/maps/dir/?api=1&';
+  let origin = 'origin=' + this.state.userCoords.lat + ',' + this.state.userCoords.lng;
+  let destination = '&destination=' + this.props.restaurant.restaurant.location.latitude + ',' + this.props.restaurant.restaurant.location.longitude;
+  let newUrl = new URL(url + origin + destination);
+  let wind = window.open(newUrl, '_blank');
+    wind.focus()
+    console.log(origin)
   }
 
 
   render(){
 
+    console.log(this.state.userCoords)
     console.log('props of detail', this.props)
 
-
+    console.log('restaurant', this.state.highlights)
     let restaurantHighlightStr = this.state.highlights.slice(0, 5).toString()
     let restaurantHighlightNewStr = restaurantHighlightStr.replace(/,/g, ', ');
-    console.log('restaurant', this.state.highlights)
-
     let userHighlight = []
     if (localStorage.getItem('my-app-user')) {
     let userHighlights = (this.state.userHighlights)
@@ -47,10 +59,11 @@ class RestaurantDetail extends Component {
     }
   ));
   }
-
     compare(userHighlight, this.state.highlights)
     let highlightStr = finalarray.toString()
     let highlightNewStr = highlightStr.replace(/,/g, ', ');
+
+
 
 
     return (
@@ -60,7 +73,7 @@ class RestaurantDetail extends Component {
         <h5>Cuisine</h5>
         <p>{this.props.restaurant.restaurant.cuisines}</p>
         <h5>Address</h5>
-        <p>{this.props.restaurant.restaurant.location.address}</p>
+        <button className='directionsbtn' onClick={this.googleDirections}>{this.props.restaurant.restaurant.location.address}</button>
         <h5>Hours</h5>
         <p>{this.props.restaurant.restaurant.timings}</p>
         {highlightNewStr ? (

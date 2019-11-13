@@ -28,8 +28,21 @@
   background-color: rgba(56, 59, 61, .9);
   padding: 20px;
   color: #fff;
+}
 
-
+.miniaside {
+  position: absolute;
+    width: 18%;
+    top: 2.5%;
+    margin-left: 1.5%;
+    height: 12vh;
+    text-align: center;
+    border: solid 1px #282C2F;
+    border-radius: 5px;
+    background-color: rgba(56, 59, 61, .9);
+    padding: 20px;
+    color: #fff;
+    animation: asideslide 1s;
 }
 
 @keyframes asideslide {
@@ -113,3 +126,18 @@ input[type=checkbox]:checked + label{
 
    }
  }
+
+.togglebtn{
+  margin-left: 90%;
+}
+
+.directionsbtn {
+  background: none!important;
+  border: none;
+  margin-bottom: 1%;
+  padding: 0!important;
+  font-family: arial, sans-serif;
+  color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
+}

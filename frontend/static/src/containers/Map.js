@@ -37,7 +37,7 @@ class MyMap extends Component {
     axios.get(`/api/v1/profile/detail/`, {headers: headers})
     .then(res => {
     this.setState({profile: res.data[0]});
-    this.setState({markerImage: this.state.profile.avatar})
+
     })
 
     navigator.geolocation.getCurrentPosition(
@@ -72,7 +72,7 @@ class MyMap extends Component {
     bounds.extend(latLng);
 
     console.log('bounds', bounds);
-  
+
     return (
 
         <GoogleMap

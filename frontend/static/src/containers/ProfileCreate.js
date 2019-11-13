@@ -103,7 +103,8 @@ class ProfileCreate extends Component {
     console.log(highlights)
     axios.post(`/api/v1/profile/create/`, formData, {
       headers : {
-        'content-type': 'multipart/form-data'
+        'content-type': 'multipart/form-data',
+        'Authorization': `Token ${JSON.stringify(localStorage.getItem('my-app-user')).token}`
       }
     })
     .then(res => {
