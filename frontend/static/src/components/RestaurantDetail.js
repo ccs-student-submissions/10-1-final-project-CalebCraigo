@@ -48,7 +48,7 @@ class RestaurantDetail extends Component {
       userHighlights.forEach(function(item){
         return userHighlight.push(item.text)
       })
-    }
+    } 
 
     const finalarray =[];
     function compare(arr1, arr2) {
