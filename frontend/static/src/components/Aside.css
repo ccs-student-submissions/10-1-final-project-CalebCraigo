@@ -141,3 +141,27 @@ input[type=checkbox]:checked + label{
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* Login */
+
+.usernameinput {
+  margin-left: 1%;
+  border-radius: 3px;
+  border: none;
+}
+
+.emailinput {
+  margin-left: 6%;
+  border-radius: 3px;
+  border: none;
+}
+
+.passwordinput {
+  margin-left: 1.6%;
+  border-radius: 3px;
+  border: none;
+}
+
+.backbtn {
+  margin-left: 1%;
+}

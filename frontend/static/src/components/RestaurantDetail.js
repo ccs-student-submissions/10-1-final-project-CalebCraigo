@@ -44,6 +44,7 @@ class RestaurantDetail extends Component {
     let restaurantHighlightNewStr = restaurantHighlightStr.replace(/,/g, ', ');
     let userHighlight = []
     // if (localStorage.getItem('my-app-user')) {
+    // causes white screen on heroku, refresh screen and works fine.
     let userHighlights = (this.state.userHighlights)
       userHighlights.forEach(function(item){
         return userHighlight.push(item.text)
