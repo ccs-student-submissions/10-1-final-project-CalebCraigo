@@ -41,6 +41,37 @@ class Base extends Component {
 
 
 
+    // let headers = null;
+    //
+    // if(localStorage.getItem('my-app-user')) {
+    //   headers = {
+    //     'Authorization': `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`
+    //   }
+    // }
+    //
+    // axios.get(`/api/v1/profile/detail/`, {headers: headers})
+    // .then(res => {
+    //
+    //   let highlight = []
+    //   let highlights = res.data[0].highlights
+    //   highlights.forEach(function(item){
+    //     return highlight.push(item.text)
+    //   })
+    //   let highlightStr = highlight.toString()
+    //   let highlightNewStr = highlightStr.replace(/,/g, ' ');
+    //   let highlightsURL = encodeURI(highlightNewStr)
+    //
+    //   this.setState({profile: res.data[0], highlight});
+    //   this.setState({highlight: highlightsURL})
+    //   console.log(this.state.highlight)
+    //
+    // })
+    // .catch(error =>{
+    //   console.log(error);
+    // });
+   }
+
+  randomGenerator(){
     let headers = null;
 
     if(localStorage.getItem('my-app-user')) {
@@ -49,47 +80,50 @@ class Base extends Component {
       }
     }
 
-    axios.get(`/api/v1/profile/detail/`, {headers: headers})
-    .then(res => {
+    if(localStorage.getItem('my-app-user')) {
 
-      let highlight = []
-      let highlights = res.data[0].highlights
-      highlights.forEach(function(item){
-        return highlight.push(item.text)
+      axios.get(`/api/v1/profile/detail/`, {headers: headers})
+      .then(res => {
+        let highlight = []
+        let highlights = res.data[0].highlights
+        highlights.forEach(function(item){
+          return highlight.push(item.text)
+        })
+        let highlightStr = highlight.toString()
+        let highlightNewStr = highlightStr.replace(/,/g, ' ');
+        let highlightsURL = encodeURI(highlightNewStr)
+        this.setState({profile: res.data[0], highlight});
+        this.setState({highlight: highlightsURL})
+        console.log(this.state.highlight)
+        axios.get(`https://developers.zomato.com/api/v2.1/search?q=${this.state.highlight}&lat=${this.state.userCoords.lat}&lon=${this.state.userCoords.lng}&start=${this.state.start}&count=20&radius=200&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
+        .then(res => {
+          let restaurant = res.data.restaurants[Math.floor(Math.random()*res.data.restaurants.length)];
+          this.setState({restaurant, start: this.state.start + 20, count: this.state.count + 1, restaurantSelected: true, aside: true});
+          console.log(this.state.restaurant)
+          })
+          .catch(error => {
+            console.log(error);
+
+          });
       })
-      let highlightStr = highlight.toString()
-      let highlightNewStr = highlightStr.replace(/,/g, ' ');
-      let highlightsURL = encodeURI(highlightNewStr)
-
-      this.setState({profile: res.data[0], highlight});
-
-      // this.setState({profile: res.data[0]});
-      //
-      // let highlights = [...this.state.profile.highlights]
-      // highlights.forEach(function(item){
-      //   return highlight.push(item.text)
-      // })
-      // let highlightStr = highlight.toString()
-      // let highlightNewStr = highlightStr.replace(/,/g, ' ');
-      // let highlightsURL = encodeURI(highlightNewStr)
-      // this.setState({highlight: highlightsURL})
-    })
-    .catch(error =>{
-      console.log(error);
-    });
-   }
-
-  randomGenerator(){
-    axios.get(`https://developers.zomato.com/api/v2.1/search?lat=${this.state.userCoords.lat}&lon=${this.state.userCoords.lng}&start=${this.state.start}&count=20&radius=2000&q=${this.state.highlight}&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
-    .then(res => {
-      let restaurant = res.data.restaurants[Math.floor(Math.random()*res.data.restaurants.length)];
-      this.setState({restaurant, start: this.state.start + 20, count: this.state.count + 1, restaurantSelected: true, aside: true});
+      .catch(error =>{
+        console.log(error);
+      });
+    }else{
+      axios.get(`https://developers.zomato.com/api/v2.1/search?q=${this.state.highlight}&lat=${this.state.userCoords.lat}&lon=${this.state.userCoords.lng}&start=${this.state.start}&count=20&radius=200&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
+      .then(res => {
+        let restaurant = res.data.restaurants[Math.floor(Math.random()*res.data.restaurants.length)];
+        this.setState({restaurant, start: this.state.start + 20, count: this.state.count + 1, restaurantSelected: true, aside: true});
+        console.log(this.state.restaurant)
 
 
-      })
-    .catch(error => {
-      console.log(error);
-    });
+        })
+        .catch(error => {
+          console.log(error);
+
+        });
+    }
+
     console.log('randomGenerate is firing');
     }
 
@@ -99,16 +133,11 @@ class Base extends Component {
     }
     return null;
   }
-
   minimize() {
     this.setState({toggle: true})
     console.log(this.state.toggle)
   }
-
-
   render(){
-    console.log('base js is render');
-
     return (
       <div className='row'>
         <Map restaurantLocation={this.state.restaurant ? {lat: Number(this.state.restaurant.restaurant.location.latitude), lng: Number(this.state.restaurant.restaurant.location.longitude)} : {lat: 34.8526, lng: -82.3940}}/>
@@ -121,7 +150,7 @@ class Base extends Component {
             {this.props.location.pathname === '/' && this.state.count !== 3 && <button className='buttons btn btn-secondary btn-lg' type='button' onClick={this.randomGenerator}>Let's Eat!</button>}
             {this.state.count === 3 && <h4>Three strikes and you're out. Shut up and eat!</h4>}
             </div>
-        
+
           </div>
         </aside>
       </div>

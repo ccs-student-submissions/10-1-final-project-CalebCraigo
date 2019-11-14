@@ -71,7 +71,7 @@ class MyMap extends Component {
     latLng = new window.google.maps.LatLng(this.state.restaurantLocation.lat, this.state.restaurantLocation.lng);
     bounds.extend(latLng);
 
-    console.log('bounds', bounds);
+
 
     return (
 

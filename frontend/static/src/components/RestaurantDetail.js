@@ -23,6 +23,7 @@ class RestaurantDetail extends Component {
     axios.get('/api/v1/profile/detail/', {headers: headers})
     .then(res => {
     this.setState({userHighlights: res.data[0].highlights});
+    console.log(this.state.userHighlights)
     })
     .catch(error =>{
       console.log(error);
@@ -32,7 +33,9 @@ class RestaurantDetail extends Component {
   static getDerivedStateFromProps(props, state) {
       return {
         highlights: props.restaurant.restaurant.highlights,
+        userCoords: props.userCoords
       }
+      console.log(this.state.userCoords)
   }
 
   googleDirections(){
@@ -48,8 +51,6 @@ class RestaurantDetail extends Component {
 
   render(){
 
-    console.log(this.state.userCoords)
-    console.log('props of detail', this.props)
 
     console.log('restaurant', this.state.highlights)
     let restaurantHighlightStr = this.state.highlights.slice(0, 5).toString()
@@ -75,6 +76,7 @@ class RestaurantDetail extends Component {
     compare(userHighlight, this.state.highlights)
     let highlightStr = finalarray.toString()
     let highlightNewStr = highlightStr.replace(/,/g, ', ');
+
 
 
 
