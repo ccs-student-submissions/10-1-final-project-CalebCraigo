@@ -76,7 +76,7 @@ class MyMap extends Component {
     return (
 
         <GoogleMap
-          ref={map => map && map.fitBounds(bounds, {padding: {top: 300, bottom: 300, left: 300, right: 300}})}
+          ref={map => map && map.fitBounds(bounds, {top: 100, left:400, bottom:100, right: 100})}
           defaultZoom={15}
           minZoom={5}
           defaultCenter={ userLocation }
