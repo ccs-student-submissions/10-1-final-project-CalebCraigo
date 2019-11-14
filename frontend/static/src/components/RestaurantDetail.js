@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import axios from 'axios';
 
 class RestaurantDetail extends Component {
   constructor(props) {
@@ -12,14 +12,26 @@ class RestaurantDetail extends Component {
     this.googleDirections = this.googleDirections.bind(this)
   }
 
-  // componentDidMount(props) {
-  //   this.setState({newrestaurant: this.props.restaurant})
-  // }
+  componentDidMount() {
+    let headers = null;
+
+    if(localStorage.getItem('my-app-user')) {
+      headers = {
+        'Authorization': `Token ${JSON.parse(localStorage.getItem('my-app-user')).token}`
+      }
+    }
+    axios.get('/api/v1/profile/detail/', {headers: headers})
+    .then(res => {
+    this.setState({userHighlights: res.data[0].highlights});
+    })
+    .catch(error =>{
+      console.log(error);
+    });
+
+  }
   static getDerivedStateFromProps(props, state) {
       return {
         highlights: props.restaurant.restaurant.highlights,
-        userHighlights: props.profile.highlights,
-        userCoords : props.userCoords
       }
   }
 
@@ -88,9 +100,6 @@ class RestaurantDetail extends Component {
             <p>{restaurantHighlightNewStr}</p>
           </React.Fragment>
         )}
-
-
-
 
       </div>
     );
