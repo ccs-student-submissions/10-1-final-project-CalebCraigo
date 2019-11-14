@@ -43,13 +43,13 @@ class RestaurantDetail extends Component {
     let restaurantHighlightStr = this.state.highlights.slice(0, 5).toString()
     let restaurantHighlightNewStr = restaurantHighlightStr.replace(/,/g, ', ');
     let userHighlight = []
-    // if (localStorage.getItem('my-app-user')) {
+    if (localStorage.getItem('my-app-user')) {
     // causes white screen on heroku, refresh screen and works fine.
     let userHighlights = (this.state.userHighlights)
       userHighlights.forEach(function(item){
         return userHighlight.push(item.text)
       })
-    // }
+    }
 
     const finalarray =[];
     function compare(arr1, arr2) {
