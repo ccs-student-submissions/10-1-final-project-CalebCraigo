@@ -123,7 +123,7 @@ class Base extends Component {
             {/* only show RestaurantDetail component if random restaurant was selected */}
             {this.state.restaurantSelected && <RestaurantDetail restaurant={this.state.restaurant} profile={this.state.profile} userCoords={this.state.userCoords} />}
             {this.props.location.pathname === '/' && this.state.count !== 3 && <button className='buttons btn btn-secondary btn-lg' type='button' onClick={this.randomGenerator}>Let's Eat!</button>}
-            {this.state.count === 3 && <div>You are too picky!</div>}
+            {this.state.count === 3 && <div>Shut up and eat!</div>}
             </div>
           }
           </div>
