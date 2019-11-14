@@ -181,18 +181,13 @@ class ProfileDetails extends Component {
 
             <input className='checkbox' id='live_music' checked={this.state.live_music} type='checkbox' name='live_music' value={this.state.live_music} onChange={this.handleCheckboxChange} />
             <label htmlFor="live_music" className="checkbox">Live Music</label>
-            </section>
+          </section>
             <a href='/' className='btn btn-secondary'>Back</a>
             <button className='buttons btn btn-secondary'>Save</button>
           </form>
-
-
-
             <button className='buttons btn btn-secondary' onClick={this.deactivate}>Deactivate Account</button>
             <button className='buttons btn btn-secondary' onClick={this.logout}>Log Out</button>
           </React.Fragment>
-
-
       </section>
     );
   };

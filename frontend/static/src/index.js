@@ -18,7 +18,6 @@ ReactDOM.render(
 
         <Switch>
           <Base>
-            <Route path='/restaurant/' component={RestaurantDetail} />
             <Route path='/profile/create/' component={ProfileCreate} />
             <Route path='/profile/' component={ProfileDetails} />
             <Route path='/login/' component={Login} />
