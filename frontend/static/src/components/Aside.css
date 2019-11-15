@@ -24,6 +24,7 @@
   margin-left: 28%;
   height: 50vh;
   width: 40%;
+  overflow: scroll;
   text-align: center;
   border: solid 1px #282C2F;
   border-radius: 5px;

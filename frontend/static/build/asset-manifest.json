@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.ea47a309.chunk.css",
+    "main.css": "/static/css/main.638e47c8.chunk.css",
     "main.js": "/static/js/main.7c8895aa.chunk.js",
     "main.js.map": "/static/js/main.7c8895aa.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.107b9db7.js",
@@ -8,16 +8,16 @@
     "static/js/2.8a255a6d.chunk.js": "/static/js/2.8a255a6d.chunk.js",
     "static/js/2.8a255a6d.chunk.js.map": "/static/js/2.8a255a6d.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.21087ae411b9d275f4ed23692645c38a.js": "/precache-manifest.21087ae411b9d275f4ed23692645c38a.js",
+    "precache-manifest.057fbe3108054c3a8ece9aa7e05f6172.js": "/precache-manifest.057fbe3108054c3a8ece9aa7e05f6172.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.ea47a309.chunk.css.map": "/static/css/main.ea47a309.chunk.css.map",
+    "static/css/main.638e47c8.chunk.css.map": "/static/css/main.638e47c8.chunk.css.map",
     "static/media/user-circle-solid.svg": "/static/media/user-circle-solid.c3580913.svg",
     "static/media/utensils-solid.svg": "/static/media/utensils-solid.4dd1c615.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.107b9db7.js",
     "static/js/2.8a255a6d.chunk.js",
-    "static/css/main.ea47a309.chunk.css",
+    "static/css/main.638e47c8.chunk.css",
     "static/js/main.7c8895aa.chunk.js"
   ]
 }
