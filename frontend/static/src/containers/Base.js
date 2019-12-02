@@ -95,7 +95,7 @@ class Base extends Component {
         this.setState({profile: res.data[0], highlight});
         this.setState({highlight: highlightsURL})
         console.log(this.state.highlight)
-        axios.get(`https://developers.zomato.com/api/v2.1/search?q=${this.state.highlight}&lat=${this.state.userCoords.lat}&lon=${this.state.userCoords.lng}&start=${this.state.start}&count=20&radius=200&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
+        axios.get(`https://developers.zomato.com/api/v2.1/search?q=${this.state.highlight}&lat=${this.state.userCoords.lat}&lon=${this.state.userCoords.lng}&radius=2000&start=${this.state.start}&count=20&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
         .then(res => {
           let restaurant = res.data.restaurants[Math.floor(Math.random()*res.data.restaurants.length)];
           this.setState({restaurant, start: this.state.start + 20, count: this.state.count + 1, restaurantSelected: true, aside: true});
@@ -110,7 +110,7 @@ class Base extends Component {
         console.log(error);
       });
     }else{
-      axios.get(`https://developers.zomato.com/api/v2.1/search?q=${this.state.highlight}&lat=${this.state.userCoords.lat}&lon=${this.state.userCoords.lng}&start=${this.state.start}&count=20&radius=200&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
+      axios.get(`https://developers.zomato.com/api/v2.1/search?q=${this.state.highlight}&lat=${this.state.userCoords.lat}&lon=${this.state.userCoords.lng}&radius=1000&start=${this.state.start}&count=20&apikey=5ff1c6015f3549f838e7d3a54deb7e8f`)
       .then(res => {
         let restaurant = res.data.restaurants[Math.floor(Math.random()*res.data.restaurants.length)];
         this.setState({restaurant, start: this.state.start + 20, count: this.state.count + 1, restaurantSelected: true, aside: true});
